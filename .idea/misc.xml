@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/cuctom_lock_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/custom_button.xml" value="0.109" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/custom_email_icon.xml" value="0.1085" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/custom_input.xml" value="0.1235" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/ic_email.xml" value="0.1235" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/ic_email_focus.xml" value="0.1085" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/ic_lock.xml" value="0.1235" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/ic_lock_focus.xml" value="0.1085" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/ic_phone.xml" value="0.1425" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/slider_background.xml" value="0.152" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_main.xml" value="0.165625" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_register.xml" value="0.1796875" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_roy.xml" value="0.17604166666666668" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/app_bar_main.xml" value="0.268" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/category_item.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/fragment_gallery.xml" value="0.1796875" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/fragment_home.xml" value="0.1796875" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/fragment_home2.xml" value="0.36" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/fragment_reset_pw_.xml" value="0.20947176684881602" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/grid_product_layout.xml" value="0.132" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/horizontal_scroll_item_layout.xml" value="0.2" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/horizontal_scroll_layout.xml" value="0.36" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/nav_header_main.xml" value="0.4" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/slider_layout.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/sliding_ad_layout.xml" value="0.1796875" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/strip_ad_layout.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/menu/activity_main_drawer.xml" value="0.1796875" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/menu/main.xml" value="0.1796875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.36" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

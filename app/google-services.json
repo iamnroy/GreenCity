@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "447869409605",
+    "project_id": "green-city-7b292",
+    "storage_bucket": "green-city-7b292.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447869409605:android:a09683e5f1a64f5dca462c",
+        "android_client_info": {
+          "package_name": "com.example.greencity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447869409605-ta7pbf3viurnn23knfuc21437vnn84c4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6ZbCddgm6w-9JjjjA1JRsrpd1xr7Qc24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447869409605-ta7pbf3viurnn23knfuc21437vnn84c4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

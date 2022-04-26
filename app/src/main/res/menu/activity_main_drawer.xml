@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group>
+        <item
+            android:id="@+id/nav_mycity"
+            android:icon="@mipmap/mycity"
+            android:title="Green City" />
+        <item
+            android:id="@+id/nav_my_orders"
+            android:icon="@mipmap/ordericon"
+            android:title="My Orders" />
+        <item
+            android:id="@+id/nav_rewards"
+            android:icon="@mipmap/pointsicon"
+            android:title="My Rewards" />
+        <item
+            android:id="@+id/nav_cart"
+            android:icon="@mipmap/carticon"
+            android:title="My Cart" />
+
+        <item
+            android:id="@+id/nav_wishlist"
+            android:icon="@mipmap/wishicon"
+            android:title="My Wishlist" />
+        <item
+            android:id="@+id/nav_myaccount"
+            android:icon="@mipmap/usericon"
+            android:title="My Account" />
+
+    </group>
+    <item
+        android:id="@+id/nav_signout"
+        android:icon="@mipmap/signouticon"
+        android:title="Sign Out" />
+</menu>
