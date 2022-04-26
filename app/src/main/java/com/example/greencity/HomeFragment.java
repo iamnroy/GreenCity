@@ -52,7 +52,6 @@ public class HomeFragment extends Fragment {
     private ImageView stripAdImage;
     private ConstraintLayout stripAdContainer;
 
-
     ///STRIP Layout
 
     ////HORIZONTAL Product
@@ -201,6 +200,18 @@ public class HomeFragment extends Fragment {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         testing.setLayoutManager(testingLayoutManager);
 
+        List<HomePageModel> homePageModelList = new ArrayList<>();
+        homePageModelList.add(new HomePageModel(0,sliderModelList));
+        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#000000"));
+        homePageModelList.add(new HomePageModel(0,sliderModelList));
+        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
+        homePageModelList.add(new HomePageModel(0,sliderModelList));
+        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#000000"));
+
+        HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
+
+        testing.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         ////////////////////////////
         return view;
     }
