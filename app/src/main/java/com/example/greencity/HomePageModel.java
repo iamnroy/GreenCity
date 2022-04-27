@@ -8,6 +8,9 @@ public class HomePageModel {
 
     public static final int BANNER_SLIDER = 0;
     public static final int STRIP_AD_BANNER = 1;
+    public static final int HORIZONTAL_PRODUCT_VIEW = 2;
+    public static final int GRID_PRODUCT_VIEW = 3;
+
 
     private int type;
 
@@ -62,4 +65,34 @@ public class HomePageModel {
         this.backgroundcolor = backgroundcolor;
     }
     //STRIP AD END
+
+    //Horizontal Product and Grid product Layout
+
+    private String title;
+    private  List<HorizontalProductModel> horizontalProductModelList;
+
+    public HomePageModel(int type, String title, List<HorizontalProductModel> horizontalProductModelList) {
+        this.type = type;
+        this.title = title;
+        this.horizontalProductModelList = horizontalProductModelList;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<HorizontalProductModel> getHorizontalProductModelList() {
+        return horizontalProductModelList;
+    }
+
+    public void setHorizontalProductModelList(List<HorizontalProductModel> horizontalProductModelList) {
+        this.horizontalProductModelList = horizontalProductModelList;
+    }
+    ///HORIZONTAL PRODUCT LAYOUT
+
+
 }

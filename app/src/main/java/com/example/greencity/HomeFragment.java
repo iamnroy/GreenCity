@@ -170,6 +170,8 @@ public class HomeFragment extends Fragment {
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email,"list2","newDescsc","RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
 
         HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductModelList);
 
@@ -201,12 +203,15 @@ public class HomeFragment extends Fragment {
         testing.setLayoutManager(testingLayoutManager);
 
         List<HomePageModel> homePageModelList = new ArrayList<>();
-        homePageModelList.add(new HomePageModel(0,sliderModelList));
+        //homePageModelList.add(new HomePageModel(0,sliderModelList));
         homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#000000"));
-        homePageModelList.add(new HomePageModel(0,sliderModelList));
+        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
+        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
         homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
-        homePageModelList.add(new HomePageModel(0,sliderModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#000000"));
+        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
+        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
+        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
+       // homePageModelList.add(new HomePageModel(0,sliderModelList));
 
         HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
 
