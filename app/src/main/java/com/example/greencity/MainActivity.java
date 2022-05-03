@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.FrameLayout;
+import android.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout framelayout;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private Toolbar toolbar;
     NavigationView navigationView;
 
 
@@ -33,11 +35,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
             //setContentView(R.layout.activity_main);
-            //Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.fragment_home2);
+
+        Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
+       //toolbar = findViewById(R.id.toolbar);
          binding = ActivityMainBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
           //setSupportActionBar(toolbar);
-//          getSupportActionBar().setDisplayShowTitleEnabled(false);
+         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         setSupportActionBar(binding.appBarMain.toolbar);
