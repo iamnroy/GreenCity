@@ -124,6 +124,7 @@ public class SignInFragment extends Fragment {
             public void onClick(View view) {
                 //mainIntent();
                 startActivity(new Intent(getActivity(),MainActivity.class));
+                //startActivity(new Intent(getActivity(),ProductDetails.class));
                 getActivity().finish();
             }
         });

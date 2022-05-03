@@ -1,5 +1,6 @@
 package com.example.greencity;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,15 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
             productTitle = itemView.findViewById(R.id.hori_scr_pro_title);
             productDesc = itemView.findViewById(R.id.hori_scr_pro_desc);
             productPrice = itemView.findViewById(R.id.hori_sc_pro_price);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent productDetailsIntent = new Intent(itemView.getContext(),ProductDetails.class);
+                    itemView.getContext().startActivity(productDetailsIntent);
+                }
+            });
+
 
         }
 

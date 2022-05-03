@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="3dp"
+    android:background="#DBEDDC"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/product_images_viewpager"
@@ -123,6 +125,56 @@
         app:layout_constraintEnd_toEndOf="@+id/cutted_price"
         app:layout_constraintStart_toStartOf="@+id/cutted_price"
         app:layout_constraintTop_toTopOf="@+id/cutted_price" />
+
+    <ImageView
+        android:id="@+id/cod_indicator_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewpager_indicator"
+        app:srcCompat="@drawable/cod" />
+
+    <TextView
+        android:id="@+id/tv_cod_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/cod_indicator_image"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="@+id/cod_indicator_image"
+        app:layout_constraintTop_toBottomOf="@+id/cod_indicator_image" />
+
+    <LinearLayout
+        android:id="@+id/coupen_redeem_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:background="#37A2D3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_price">
+
+        <TextView
+            android:id="@+id/tv_coupen_redeem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Check Coupen Redemption"
+            android:textColor="#EFECEC" />
+
+        <Button
+            android:id="@+id/coupen_redeem_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:background="@drawable/border_background"
+            android:text="Redeem" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

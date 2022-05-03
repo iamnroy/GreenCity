@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.Toolbar;
+//import android.support.v7.widget.Toolbar;
+
+
 
 import com.example.greencity.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +40,7 @@ public class ProductDetails extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-       // setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -54,7 +57,7 @@ public class ProductDetails extends AppCompatActivity {
         productImagesViewPager.setAdapter(productimagesAdapter);
 
 
-        //viewpagerIndicator.
+       // viewpagerIndicator.setupWithViewPager(productImagesViewPager,true);
         addTowishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
