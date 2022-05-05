@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:elevation="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/can" />
+
+    <TextView
+        android:id="@+id/product_title_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Coke Can"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/product_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/free_coupen_icon"
+        android:layout_width="15dp"
+        android:layout_marginTop="1dp"
+        android:layout_height="15dp"
+        app:layout_constraintStart_toStartOf="@+id/product_title_cart"
+        app:layout_constraintTop_toBottomOf="@+id/product_title_cart"
+        app:srcCompat="@drawable/tag" />
+
+    <TextView
+        android:id="@+id/tv_free_cpupen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Free 1 Coupen"
+        android:textColor="#4CAF50"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/free_coupen_icon"
+        app:layout_constraintTop_toBottomOf="@+id/product_title_cart" />
+
+    <TextView
+        android:id="@+id/product_price_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Rs.3999/-"
+        android:textSize="22sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_free_cpupen" />
+
+    <TextView
+        android:id="@+id/cutted_price_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Rs.4999/-"
+        app:layout_constraintBottom_toBottomOf="@+id/product_price_cart"
+        app:layout_constraintEnd_toStartOf="@+id/product_price_cart" />
+
+    <View
+        android:id="@+id/price_cut_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/cutted_price_cart"
+        app:layout_constraintEnd_toStartOf="@+id/product_price_cart"
+        app:layout_constraintStart_toStartOf="@+id/cutted_price_cart"
+        app:layout_constraintTop_toTopOf="@+id/cutted_price_cart" />
+
+    <TextView
+        android:id="@+id/offers_applied"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Offers applied"
+        android:textSize="12sp"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_price_cart" />
+
+    <TextView
+        android:id="@+id/coupens_applied"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Coupens applied"
+        android:textColor="#F44336"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offers_applied" />
+
+    <TextView
+        android:id="@+id/product_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Qty: 2"
+        android:textColor="#000000"
+        android:background="@drawable/border_background"
+        android:backgroundTint="#000000"
+        android:padding="3dp"
+        android:drawableEnd="@drawable/down2"
+        android:drawablePadding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/coupens_applied"
+        app:layout_constraintStart_toEndOf="@+id/product_image"
+        app:layout_constraintTop_toBottomOf="@+id/cutted_price_cart" />
+
+    <LinearLayout
+        android:id="@+id/coupen_redeem_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#37A2D3"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offers_applied"
+        app:layout_constraintVertical_bias="0.067">
+
+        <TextView
+            android:id="@+id/tv_coupen_redeem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Check Coupen Redemption"
+            android:textColor="#EFECEC" />
+
+        <Button
+            android:id="@+id/coupen_redeem_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:background="@drawable/border_background"
+            android:text="Redeem" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/remove_item_btn"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#E3DBDB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coupen_redeem_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Remove Item"
+            android:gravity="center"
+            android:drawablePadding="4dp"
+            android:textColor="#000000"
+            android:drawableStart="@drawable/del" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
