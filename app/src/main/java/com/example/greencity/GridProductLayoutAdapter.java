@@ -1,5 +1,7 @@
 package com.example.greencity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +35,20 @@ public class GridProductLayoutAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
+    public View getView(int i, View convertView,final ViewGroup viewGroup) {
         View view;
         if (convertView == null) {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.horizontal_scroll_item_layout, null);
             view.setElevation(0);
+            view.setBackgroundColor(Color.parseColor("#ffffff"));
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent productDetailsIntent = new Intent(viewGroup.getContext(),ProductDetails.class);
+                    viewGroup.getContext().startActivity(productDetailsIntent);
+                }
+            });
 
             ImageView productImage = view.findViewById(R.id.horizontal_sc_pro_img);
             TextView productTitle = view.findViewById(R.id.hori_scr_pro_title);

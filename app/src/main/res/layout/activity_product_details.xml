@@ -44,6 +44,12 @@
             <include layout="@layout/product_images_layout" />
 
             <include layout="@layout/rewards_with_product_layout" />
+
+            <include layout="@layout/product_desc_layout" />
+
+            <include layout="@layout/product_details_only_layout" />
+
+            <include layout="@layout/ratings_layout" />
         </LinearLayout>
     </ScrollView>
 
