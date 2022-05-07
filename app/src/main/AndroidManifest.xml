@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GreenCity">
         <activity
+            android:name=".OrderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProductDetails"
             android:exported="false" />
         <activity

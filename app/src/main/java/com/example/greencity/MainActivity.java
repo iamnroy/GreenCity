@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
         actionBarLogo = findViewById(R.id.actionbar_logo);
-       toolbar = findViewById(R.id.toolbar);
+       //toolbar = findViewById(R.id.toolbar);
          binding = ActivityMainBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
           //setSupportActionBar(toolbar);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.getMenu().getItem(3).setChecked(true);
+        navigationView.getMenu().getItem(0).setChecked(true); //index might be changed to 3
 
 
         ///COMMENT THESE 3 to run Navigation_bar
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //framelayout =findViewById(R.id.app_bar_main);
 
         setFragment(new HomeFragment(),HOME_FRAGEMENT);
+
 
     }
 
