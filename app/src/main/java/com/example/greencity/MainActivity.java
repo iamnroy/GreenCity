@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int ORDERS_FRAFEMENT = 2;
     private static final int WISHLIST_FRAGMENT= 3;
     private static final int REWARDS_FRAGMENT= 4;
+    private static final int ACCOUNT_FRAGMENT= 5;
+
 
 
     private FrameLayout framelayout;
@@ -148,10 +150,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
 
         }else if (id == R.id.maincart){
-            gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
+            //gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
            // gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
             //gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
            // gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
+            gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
+
 
 
 
@@ -213,10 +217,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         }else if (id == R.id.nav_cart){
-            gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
+           // gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
           //  gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
            // gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
            // gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
+            gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
+
 
 
 
@@ -225,6 +231,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
 
         }else if (id == R.id.nav_myaccount){
+            gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
+
 
         }else if (id == R.id.nav_signout){
 
