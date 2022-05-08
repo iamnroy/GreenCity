@@ -1,9 +1,12 @@
 package com.example.greencity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
@@ -12,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int HOME_FRAGEMENT = 0;
     private static final int CART_FRAGEMENT = 1;
     private static final int ORDERS_FRAFEMENT = 2;
+    private static final int WISHLIST_FRAGMENT= 3;
+    private static final int REWARDS_FRAGMENT= 4;
 
 
     private FrameLayout framelayout;
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActivityMainBinding binding;
     private Toolbar toolbar;
     private NavigationView navigationView;
+
+    private Window window;
 
 
     @Override
@@ -53,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setContentView(binding.getRoot());
           //setSupportActionBar(toolbar);
          //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
 
 
        setSupportActionBar(binding.appBarMain.toolbar);
@@ -86,6 +98,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    //BACK BTN
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            if (currentFragement == HOME_FRAGEMENT) {
+                super.onBackPressed();
+            }else{
+                actionBarLogo.setVisibility(View.VISIBLE);
+                invalidateOptionsMenu();
+                setFragment(new HomeFragment(),HOME_FRAGEMENT);
+                navigationView.getMenu().getItem(0).setChecked(true);
+            }
+        }
+    }
+    //BACK BTN
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -118,8 +148,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
 
         }else if (id == R.id.maincart){
-          //  gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
-            gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
+            gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
+           // gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
+            //gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
+           // gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
+
+
 
             return true;
 
@@ -175,13 +209,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
 
         }else if (id == R.id.nav_rewards){
+            gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
+
 
         }else if (id == R.id.nav_cart){
-           // gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
-            gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
+            gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
+          //  gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
+           // gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
+           // gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
+
+
 
 
         }else if (id == R.id.nav_wishlist){
+            gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
 
         }else if (id == R.id.nav_myaccount){
 
@@ -201,6 +242,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setFragment(Fragment fragment,int fragementNo ){
        // if (fragementNo != currentFragement) {
+
+        if (fragementNo == REWARDS_FRAGMENT){
+           window.setStatusBarColor(Color.parseColor("#3794C9"));
+           //toolbar.setBackgroundColor(Color.parseColor("000000"));
+        }else{
+            window.setStatusBarColor(getResources().getColor(R.color.primary));
+           // toolbar.setBackgroundColor(getResources().getColor(R.color.primary));
+
+        }
             currentFragement = fragementNo;
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
