@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
     private RecyclerView deliveryRecyclerView;
     private Button changedOrAddNewAddBtn;
+    public static final int SELECT_ADDRESS =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,15 @@ public class DeliveryActivity extends AppCompatActivity {
         cartAdapter.notifyDataSetChanged();
 
         changedOrAddNewAddBtn.setVisibility(View.VISIBLE);
+
+        changedOrAddNewAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myAddressesIntent = new Intent(DeliveryActivity.this,MyAddressActivity.class);
+                myAddressesIntent.putExtra("MODE",SELECT_ADDRESS);
+                startActivity(myAddressesIntent);
+            }
+        });
     }
 
     @Override

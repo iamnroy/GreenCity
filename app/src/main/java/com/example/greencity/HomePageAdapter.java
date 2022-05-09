@@ -1,5 +1,6 @@
 package com.example.greencity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.telephony.IccOpenLogicalChannelResponse;
@@ -238,6 +239,14 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             if (horizontalProductModelList.size() > 8){
                 horizontalviewAllBtn.setVisibility(View.VISIBLE);
+                horizontalviewAllBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent viewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
+                        viewAllIntent.putExtra("layout_code",0);
+                        itemView.getContext().startActivity(viewAllIntent);
+                    }
+                });
             }else {
                 horizontalviewAllBtn.setVisibility(View.INVISIBLE);
             }
@@ -268,6 +277,14 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         private void setGridProductLayout(List<HorizontalProductModel> horizontalProductModelList,String title){
             griLayoutTitle.setText(title);
             gridView.setAdapter(new GridProductLayoutAdapter(horizontalProductModelList));
+            gridLayoutViewAllBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent viewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
+                    viewAllIntent.putExtra("layout_code",1);
+                    itemView.getContext().startActivity(viewAllIntent);
+                }
+            });
 
         }
     }
