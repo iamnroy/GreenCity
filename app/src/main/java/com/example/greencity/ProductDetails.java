@@ -7,12 +7,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -40,6 +42,8 @@ public class ProductDetails extends AppCompatActivity {
     private LinearLayout rateNowContainer;
     //Rating Layout
 
+    private Button buyNowBtn;
+
     private static boolean ALREADY_ADDED_TO_WISHLIST = false;
     private FloatingActionButton addTowishlist;
 
@@ -48,9 +52,12 @@ public class ProductDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-        Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
+
+        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
+
+       // Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -59,6 +66,7 @@ public class ProductDetails extends AppCompatActivity {
         addTowishlist = findViewById(R.id.add_to_wishlist);
         productDetailsViewpager = findViewById(R.id.product_details_view_pager);
         productDetailsTablayout = findViewById(R.id.product_dtails_tablayout);
+        buyNowBtn = findViewById(R.id.buy_now_btn);
 
         List<Integer> productImage = new ArrayList<>();
         productImage.add(R.drawable.can);
@@ -115,6 +123,14 @@ public class ProductDetails extends AppCompatActivity {
             });
         }
         //Rating Layout
+
+        buyNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent deliveryIntent = new Intent(ProductDetails.this,DeliveryActivity.class);
+                startActivity(deliveryIntent);
+            }
+        });
     }
 
     private void setRating(int starPosition) {

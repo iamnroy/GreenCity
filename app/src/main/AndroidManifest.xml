@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GreenCity">
         <activity
+            android:name=".AddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeliveryActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderDetailsActivity"
             android:exported="false" />
         <activity

@@ -18,7 +18,10 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/reward_gradient_background.xml" value="0.1295" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/selected_dot.xml" value="0.1295" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/slider_background.xml" value="0.152" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_add_address.xml" value="0.1796875" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_address.xml" value="0.1796875" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_category.xml" value="0.1796875" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_delivery.xml" value="0.1796875" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_main.xml" value="0.165625" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_order_details.xml" value="0.132" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_product_details.xml" value="0.132" />
@@ -60,7 +63,7 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/ratings_layout.xml" value="0.2" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/rewards_item_layout.xml" value="0.132" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/rewards_with_product_layout.xml" value="0.268" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/shipping_details_layout.xml" value="0.2" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/shipping_details_layout.xml" value="0.132" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/slider_layout.xml" value="0.25" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/sliding_ad_layout.xml" value="0.1796875" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/strip_ad_layout.xml" value="0.25" />
