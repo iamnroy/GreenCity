@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
@@ -33,7 +36,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
       String icon = categoryModelList.get(position).getCatlink();
       String name = categoryModelList.get(position).getCatname();
-      holder.setCategory(name);
+      holder.setCategory(name,position);
+      holder.setCategoryIcon(icon);
     }
 
     @Override
@@ -44,27 +48,32 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView catIcon;
-        private TextView catName;
+        private TextView categoryName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             catIcon = itemView.findViewById(R.id.category_icon);
-            catName = itemView.findViewById(R.id.category_name);
+            categoryName = itemView.findViewById(R.id.category_name);
         }
 
-        private void setCategoryIcon(){
-            //todo cat icon
+        private void setCategoryIcon(String iconUrl){
+            if (!iconUrl.equals("null")) {
+                Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.drawable.cathome)).into(catIcon);
+            }
         }
 
-        private void setCategory(final String name){
-            catName.setText(name);
+        private void setCategory(final String name, final int position){
+            categoryName.setText(name);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent categoryIntent = new Intent(itemView.getContext(),CategoryActivity.class);
-                    categoryIntent.putExtra("CategoryName",name);
-                    itemView.getContext().startActivity(categoryIntent);
+                    if (position != 0) {
+
+                        Intent categoryIntent = new Intent(itemView.getContext(), CategoryActivity.class);
+                        categoryIntent.putExtra("CategoryName", name);
+                        itemView.getContext().startActivity(categoryIntent);
+                    }
                 }
             });
         }

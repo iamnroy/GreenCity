@@ -2,13 +2,13 @@ package com.example.greencity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import com.example.greencity.databinding.ActivityMainBinding;
 
@@ -24,18 +24,20 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_category);
-        setContentView(R.layout.fragment_home2);
-
+        setContentView(R.layout.activity_category);
+       // setContentView(R.layout.fragment_home2);
 
         Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+//        binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
 
         String title = getIntent().getStringExtra("CategoryName");
-        //getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         categoryRecyclerView = findViewById(R.id.category_recyclerview);
 
 
@@ -171,6 +173,9 @@ public class CategoryActivity extends AppCompatActivity {
 
         if (id == R.id.searchicon){
             //Todo
+            return true;
+        }else if (id == android.R.id.home) {
+            finish();
             return true;
         }
 

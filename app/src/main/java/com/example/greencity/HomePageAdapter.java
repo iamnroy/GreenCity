@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.gridlayout.widget.GridLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -26,9 +27,11 @@ import java.util.TimerTask;
 public class HomePageAdapter extends RecyclerView.Adapter {
 
     private List<HomePageModel> homePageModelList;
+    private RecyclerView.RecycledViewPool recycledViewPool;
 
     public HomePageAdapter(List<HomePageModel> homePageModelList) {
         this.homePageModelList = homePageModelList;
+        recycledViewPool = new RecyclerView.RecycledViewPool();
     }
 
     @Override
@@ -228,11 +231,15 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         private TextView HorizontalLayoutTitle;
         private Button horizontalviewAllBtn;
         private RecyclerView horizontalRecycle;
+
+
         public HorizontalProductViewholder(@NonNull View itemView) {
             super(itemView);
             HorizontalLayoutTitle = itemView.findViewById(R.id.horizontal_scroll_layout);
             horizontalviewAllBtn = itemView.findViewById(R.id.horizontal_scroll_viewAllbtn);
             horizontalRecycle = itemView.findViewById(R.id.horizontal_scroll_layout_rec);
+            horizontalRecycle.setRecycledViewPool(recycledViewPool);
+
         }
         private void setHorizontalPrpductLayout(List<HorizontalProductModel> horizontalProductModelList,String title){
             HorizontalLayoutTitle.setText(title);
@@ -267,16 +274,40 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         private TextView griLayoutTitle;
         private Button gridLayoutViewAllBtn;
-        private GridView gridView;
+        private GridLayout gridProductLayout;
+
         public gridProductViewholder(@NonNull View itemView) {
             super(itemView);
              griLayoutTitle = itemView.findViewById(R.id.grid_pro_layout_title);
              gridLayoutViewAllBtn = itemView.findViewById(R.id.grid_pro_layout_view_btn);
-             gridView = itemView.findViewById(R.id.grid_pro_layout_gridView);
+             gridProductLayout = itemView.findViewById(R.id.grid_layout);
         }
         private void setGridProductLayout(List<HorizontalProductModel> horizontalProductModelList,String title){
             griLayoutTitle.setText(title);
-            gridView.setAdapter(new GridProductLayoutAdapter(horizontalProductModelList));
+
+            for (int x =0; x < 4; x++){
+                ImageView productImage = gridProductLayout.getChildAt(x).findViewById(R.id.horizontal_sc_pro_img);
+                TextView productTitle = gridProductLayout.getChildAt(x).findViewById(R.id.hori_scr_pro_title);
+                TextView productDesc = gridProductLayout.getChildAt(x).findViewById(R.id.hori_scr_pro_desc);
+                TextView productPrice = gridProductLayout.getChildAt(x).findViewById(R.id.hori_sc_pro_price);
+
+                productImage.setImageResource(horizontalProductModelList.get(x).getProductImage());
+                productTitle.setText(horizontalProductModelList.get(x).getProductTitle());
+                productDesc.setText(horizontalProductModelList.get(x).getProductDesc());
+                productPrice.setText(horizontalProductModelList.get(x).getProductPrice());
+
+               // gridProductLayout.getChildAt(x).setBackgroundColor(Color.parseColor("ffffff"));
+
+                gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent productDetailsIntent = new Intent(itemView.getContext(),ProductDetails.class);
+                        itemView.getContext().startActivity(productDetailsIntent);
+                    }
+                });
+
+            }
+
             gridLayoutViewAllBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

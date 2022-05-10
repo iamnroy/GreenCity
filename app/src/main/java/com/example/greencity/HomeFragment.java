@@ -3,6 +3,7 @@ package com.example.greencity;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,13 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +47,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView catRecyclerView;
     private CategoryAdapter categoryAdapter;
     private RecyclerView testing;
+    private List<CategoryModel> categoryModelList;
+    private FirebaseFirestore firebaseFirestore;
 
     //Try BANNER SLIDER--------
 //    private List<SliderModel> sliderModelList;
@@ -73,35 +83,49 @@ public class HomeFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         catRecyclerView.setLayoutManager(layoutManager);
 
-        final List<CategoryModel> categoryModelList = new ArrayList<CategoryModel>();
-        categoryModelList.add(new CategoryModel("link","Home"));
-        categoryModelList.add(new CategoryModel("link","Plastic"));
-        categoryModelList.add(new CategoryModel("link","Aluminium"));
-        categoryModelList.add(new CategoryModel("link","Papers"));
-        categoryModelList.add(new CategoryModel("link","E-Waste"));
-        categoryModelList.add(new CategoryModel("link","Plastic"));
-        categoryModelList.add(new CategoryModel("link","Aluminium"));
-
+        categoryModelList = new ArrayList<CategoryModel>();
 
         categoryAdapter = new CategoryAdapter(categoryModelList);
         catRecyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.notifyDataSetChanged();
+
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("CATEGORIES").orderBy("index").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
+                            }
+                            categoryAdapter.notifyDataSetChanged();
+
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+//        categoryAdapter = new CategoryAdapter(categoryModelList);
+//        catRecyclerView.setAdapter(categoryAdapter);
+//        categoryAdapter.notifyDataSetChanged();
 
         //Banner Try
         //bannersliderviewpager = view.findViewById(R.id.banner_slider_view);
 
-        List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
+        List<SliderModel> sliderModelList = new ArrayList<SliderModel>();
 
-        sliderModelList.add(new SliderModel(R.mipmap.usericon,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.carticon,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.green_email,"ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.usericon, "ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.carticon, "ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.green_email, "ADF9C3"));
 
-        sliderModelList.add(new SliderModel(R.mipmap.home,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.usericon,"ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.home, "ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.usericon, "ADF9C3"));
 
-        sliderModelList.add(new SliderModel(R.mipmap.carticon,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.green_email,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.home,"ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.carticon, "ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.green_email, "ADF9C3"));
+        sliderModelList.add(new SliderModel(R.mipmap.home, "ADF9C3"));
 
 
         //SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
@@ -163,16 +187,16 @@ public class HomeFragment extends Fragment {
 //        horizontalRecycle = view.findViewById(R.id.horizontal_scroll_layout_rec);
 
         List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email, "list2", "newDescsc", "RS.1234"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
 
 //        HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductModelList);
 //
@@ -205,14 +229,14 @@ public class HomeFragment extends Fragment {
 
         List<HomePageModel> homePageModelList = new ArrayList<>();
         //homePageModelList.add(new HomePageModel(0,sliderModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#000000"));
-        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
-        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
-       // homePageModelList.add(new HomePageModel(0,sliderModelList));
+        homePageModelList.add(new HomePageModel(1, R.drawable.ktmbanner, "#000000"));
+        homePageModelList.add(new HomePageModel(2, "Deals of The Day", horizontalProductModelList));
+        homePageModelList.add(new HomePageModel(3, "Deals of The Day", horizontalProductModelList));
+        homePageModelList.add(new HomePageModel(1, R.drawable.ktmbanner, "#ffff00"));
+        homePageModelList.add(new HomePageModel(3, "Deals of The Day", horizontalProductModelList));
+        homePageModelList.add(new HomePageModel(2, "Deals of The Day", horizontalProductModelList));
+        homePageModelList.add(new HomePageModel(1, R.drawable.ktmbanner, "#ffff00"));
+        // homePageModelList.add(new HomePageModel(0,sliderModelList));
 
         HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
 

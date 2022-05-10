@@ -1,7 +1,10 @@
 package com.example.greencity;
 
+import static com.example.greencity.MainActivity.showCart;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -18,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.Toolbar;
 //import android.support.v7.widget.Toolbar;
 
 
@@ -33,10 +35,10 @@ import java.util.List;
 public class ProductDetails extends AppCompatActivity {
 
     private ViewPager productImagesViewPager;
-    private TableLayout viewpagerIndicator;
 
     private ViewPager productDetailsViewpager;
     private TabLayout productDetailsTablayout;
+    private TabLayout viewpagerIndicator;
 
     //Rating Layout
     private LinearLayout rateNowContainer;
@@ -53,11 +55,12 @@ public class ProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
-        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
-
-       // Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        //androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -166,7 +169,9 @@ public class ProductDetails extends AppCompatActivity {
             return true;
 
         }else if (id == R.id.maincart){
-            //Todo
+            Intent cartIntent = new Intent(ProductDetails.this,MainActivity.class);
+            showCart = true;
+            startActivity(cartIntent);
             return true;
 
         }

@@ -186,8 +186,9 @@ public class SignInFragment extends Fragment {
                        @Override
                        public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                                Intent mainIntent = new Intent(getActivity(),splash.class);
-                                startActivity(mainIntent);
+                               // Intent mainIntent = new Intent(getActivity(),splash.class);
+                            Intent mainIntent = new Intent(getActivity(),MainActivity.class);
+                            startActivity(mainIntent);
                                 getActivity().finish();
                         }else{
                             progressBar.setVisibility(View.INVISIBLE);
@@ -209,7 +210,8 @@ public class SignInFragment extends Fragment {
     }
 
     private void mainIntent(){
-        Intent mainIntent = new Intent(getActivity(),splash.class);
+        //Intent mainIntent = new Intent(getActivity(),splash.class);
+        Intent mainIntent = new Intent(getActivity(),MainActivity.class);
         startActivity(mainIntent);
         getActivity().finish();
     }

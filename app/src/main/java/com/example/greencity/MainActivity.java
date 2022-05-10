@@ -1,12 +1,18 @@
 package com.example.greencity;
 
+import static com.example.greencity.Register.setSignUpFragment;
+
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
@@ -35,13 +41,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int WISHLIST_FRAGMENT= 3;
     private static final int REWARDS_FRAGMENT= 4;
     private static final int ACCOUNT_FRAGMENT= 5;
+    public static Boolean showCart = false;
 
 
 
     private FrameLayout framelayout;
     private ImageView actionBarLogo;
 
-    private static int currentFragement = -1;
+    private int currentFragement = -1;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private Toolbar toolbar;
@@ -95,8 +102,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         framelayout =findViewById(R.id.main_framelayout);
         //framelayout =findViewById(R.id.app_bar_main);
 
-        setFragment(new HomeFragment(),HOME_FRAGEMENT);
+        if (showCart){
+          // drawer.setDrawerLockMode(1);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+            gotoFragment("My Cart",new MyCartFragment(),-2);
+        }else {
+
+            setFragment(new HomeFragment(), HOME_FRAGEMENT);
+        }
 
     }
 
@@ -107,12 +121,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         }else{
             if (currentFragement == HOME_FRAGEMENT) {
+                currentFragement = -1;
                 super.onBackPressed();
             }else{
-                actionBarLogo.setVisibility(View.VISIBLE);
-                invalidateOptionsMenu();
-                setFragment(new HomeFragment(),HOME_FRAGEMENT);
-                navigationView.getMenu().getItem(0).setChecked(true);
+
+                if(showCart){
+                    showCart = false;
+                    finish();
+                }else {
+                    actionBarLogo.setVisibility(View.VISIBLE);
+                    invalidateOptionsMenu();
+                    setFragment(new HomeFragment(), HOME_FRAGEMENT);
+                    navigationView.getMenu().getItem(0).setChecked(true);
+                }
             }
         }
     }
@@ -150,14 +171,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
 
         }else if (id == R.id.maincart){
+
+            Dialog signInDialog = new Dialog(MainActivity.this);
+            signInDialog.setContentView(R.layout.sign_in_dialog);
+            signInDialog.setCancelable(true);
+            signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            Button dialogSignInBtn = signInDialog.findViewById(R.id.signin_btn);
+            Button dialogSignUnBtn = signInDialog.findViewById(R.id.signup_btn);
+
+            Intent registerIntent = new Intent(MainActivity.this,Register.class);
+
+            dialogSignInBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signInDialog.dismiss();
+                    setSignUpFragment = false;
+                    startActivity(registerIntent);
+                }
+            });
+
+            dialogSignUnBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signInDialog.dismiss();
+                    setSignUpFragment = true;
+                    startActivity(registerIntent);
+                }
+            });
+            signInDialog.show();
+
             //gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
            // gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
             //gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
            // gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
-            gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
+            //gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
 
             return true;
 
+        }else if (id == android.R.id.home){
+            if (showCart){
+                showCart = false;
+                finish();
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -214,11 +271,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         }else if (id == R.id.nav_cart){
-           //gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
+           gotoFragment("My Cart",new MyCartFragment(),CART_FRAGEMENT);
           //  gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
            // gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
            // gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
-            gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
+            //gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
 
 
 
