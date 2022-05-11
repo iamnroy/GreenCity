@@ -44,18 +44,18 @@ public class CategoryActivity extends AppCompatActivity {
         //Banner Try
         //bannersliderviewpager = view.findViewById(R.id.banner_slider_view);
 
-        List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
+      //  List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
 
-        sliderModelList.add(new SliderModel(R.mipmap.usericon,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.carticon,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.green_email,"ADF9C3"));
-
-        sliderModelList.add(new SliderModel(R.mipmap.home,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.usericon,"ADF9C3"));
-
-        sliderModelList.add(new SliderModel(R.mipmap.carticon,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.green_email,"ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.home,"ADF9C3"));
+//        sliderModelList.add(new SliderModel(R.mipmap.usericon,"ADF9C3"));
+//        sliderModelList.add(new SliderModel(R.mipmap.carticon,"ADF9C3"));
+//        sliderModelList.add(new SliderModel(R.mipmap.green_email,"ADF9C3"));
+//
+//        sliderModelList.add(new SliderModel(R.mipmap.home,"ADF9C3"));
+//        sliderModelList.add(new SliderModel(R.mipmap.usericon,"ADF9C3"));
+//
+//        sliderModelList.add(new SliderModel(R.mipmap.carticon,"ADF9C3"));
+//        sliderModelList.add(new SliderModel(R.mipmap.green_email,"ADF9C3"));
+//        sliderModelList.add(new SliderModel(R.mipmap.home,"ADF9C3"));
 
 
         //SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
@@ -115,18 +115,18 @@ public class CategoryActivity extends AppCompatActivity {
 //        HorizontalLayoutTitle = view.findViewById(R.id.horizontal_scroll_layout);
 //        horizontalviewAllBtn = view.findViewById(R.id.horizontal_scroll_viewAllbtn);
 //        horizontalRecycle = view.findViewById(R.id.horizontal_scroll_layout_rec);
-
-        List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email,"list2","newDescsc","RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
+//
+//        List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email,"list2","newDescsc","RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm,"list2","newDescsc","RS.1234"));
 
 
 
@@ -139,16 +139,16 @@ public class CategoryActivity extends AppCompatActivity {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
-        List<HomePageModel> homePageModelList = new ArrayList<>();
-        //homePageModelList.add(new HomePageModel(0,sliderModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#000000"));
-        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
-        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
-        // homePageModelList.add(new HomePageModel(0,sliderModelList));
+         List<HomePageModel> homePageModelList = new ArrayList<>();
+//        //homePageModelList.add(new HomePageModel(0,sliderModelList));
+//        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#000000"));
+//        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
+//        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
+//        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
+//        homePageModelList.add(new HomePageModel(3,"Deals of The Day",horizontalProductModelList));
+//        homePageModelList.add(new HomePageModel(2,"Deals of The Day",horizontalProductModelList));
+//        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
+//        // homePageModelList.add(new HomePageModel(0,sliderModelList));
 
         HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
 

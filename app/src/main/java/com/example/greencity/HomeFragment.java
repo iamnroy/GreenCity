@@ -46,7 +46,8 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView catRecyclerView;
     private CategoryAdapter categoryAdapter;
-    private RecyclerView testing;
+    private RecyclerView homePageRecyclerView;
+    private HomePageAdapter adapter;
     private List<CategoryModel> categoryModelList;
     private FirebaseFirestore firebaseFirestore;
 
@@ -114,18 +115,7 @@ public class HomeFragment extends Fragment {
         //Banner Try
         //bannersliderviewpager = view.findViewById(R.id.banner_slider_view);
 
-        List<SliderModel> sliderModelList = new ArrayList<SliderModel>();
 
-        sliderModelList.add(new SliderModel(R.mipmap.usericon, "ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.carticon, "ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.green_email, "ADF9C3"));
-
-        sliderModelList.add(new SliderModel(R.mipmap.home, "ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.usericon, "ADF9C3"));
-
-        sliderModelList.add(new SliderModel(R.mipmap.carticon, "ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.green_email, "ADF9C3"));
-        sliderModelList.add(new SliderModel(R.mipmap.home, "ADF9C3"));
 
 
         //SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
@@ -186,17 +176,23 @@ public class HomeFragment extends Fragment {
 //        horizontalviewAllBtn = view.findViewById(R.id.horizontal_scroll_viewAllbtn);
 //        horizontalRecycle = view.findViewById(R.id.horizontal_scroll_layout_rec);
 
-        List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email, "list2", "newDescsc", "RS.1234"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+        ////UNCOMMENT////
+//
+//        List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.can, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ic_email, "list2", "newDescsc", "RS.1234"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.ktm, "list2", "newDescsc", "RS.1234"));
+
+
+        //UNCOMMENT///
+
 
 //        HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductModelList);
 //
@@ -222,26 +218,64 @@ public class HomeFragment extends Fragment {
         ///Grid View Product End
 
         //////////////////////////
-        testing = view.findViewById(R.id.home_page_recyclerview);
+        homePageRecyclerView = view.findViewById(R.id.home_page_recyclerview);
         LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        testing.setLayoutManager(testingLayoutManager);
-
+        homePageRecyclerView.setLayoutManager(testingLayoutManager);
         List<HomePageModel> homePageModelList = new ArrayList<>();
-        //homePageModelList.add(new HomePageModel(0,sliderModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.ktmbanner, "#000000"));
-        homePageModelList.add(new HomePageModel(2, "Deals of The Day", horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(3, "Deals of The Day", horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.ktmbanner, "#ffff00"));
-        homePageModelList.add(new HomePageModel(3, "Deals of The Day", horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(2, "Deals of The Day", horizontalProductModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.ktmbanner, "#ffff00"));
-        // homePageModelList.add(new HomePageModel(0,sliderModelList));
+        adapter = new HomePageAdapter(homePageModelList);
+        homePageRecyclerView.setAdapter(adapter);
 
-        HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
+        firebaseFirestore.collection("CATEGORIES")
+                .document("HOME")
+                .collection("TOP_DEALS").orderBy("index").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
 
-        testing.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//                                if ((long)documentSnapshot.get("view_type") == 0){
+//                                    List<SliderModel> sliderModelList = new ArrayList<>();
+//                                    long no_of_banners = (long)documentSnapshot.get("no_of_banners");
+//                                    for (long x = 1;x < no_of_banners + 1;x++){
+//                                        sliderModelList.add(new SliderModel(documentSnapshot.get("banner_"+x).toString()
+//                                                ,documentSnapshot.get("banner_"+x+"_background").toString()));
+//                                    }
+//                                    homePageModelList.add(new HomePageModel(0,sliderModelList));
+
+                               // }else
+                                    if ((long)documentSnapshot.get("view_type") == 1){
+                                    homePageModelList.add(new HomePageModel(1,documentSnapshot.get("strip_ad_banner").toString()
+                                            ,documentSnapshot.get("background").toString()));
+
+                                }else if ((long)documentSnapshot.get("view_type") == 2){
+                                        List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
+                                        long no_of_products = (long)documentSnapshot.get("no_of_products");
+                                    for (long x = 1;x < no_of_products + 1;x++){
+                                       horizontalProductModelList.add(new HorizontalProductModel(documentSnapshot.get("product_ID_"+x).toString()
+                                       ,documentSnapshot.get("product_image_"+x).toString()
+                                       ,documentSnapshot.get("product_title_"+x).toString()
+                                       ,documentSnapshot.get("product_subtitle_"+x).toString()
+                                       ,documentSnapshot.get("product_price_"+x).toString()));
+
+                                    }
+                                    homePageModelList.add(new HomePageModel(2,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_background").toString(),horizontalProductModelList));
+
+                                }else if ((long)documentSnapshot.get("view_type") == 3){
+
+                                }
+
+                            }
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
         ////////////////////////////
         return view;
     }

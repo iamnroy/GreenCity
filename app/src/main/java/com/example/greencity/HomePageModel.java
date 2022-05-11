@@ -13,6 +13,8 @@ public class HomePageModel {
 
 
     private int type;
+    private String backgroundcolor;
+
 
     ////Banner Slider
     private List<SliderModel> sliderModelList;
@@ -40,20 +42,19 @@ public class HomePageModel {
     //Banner Slider END
 
     //STRIP AD START
-    private int resource;
-    private String backgroundcolor;
+    private String resource;
 
-    public HomePageModel(int type, int resource, String backgroundcolor) {
+    public HomePageModel(int type, String resource, String backgroundcolor) {
         this.type = type;
         this.resource = resource;
         this.backgroundcolor = backgroundcolor;
     }
 
-    public int getResource() {
+    public String getResource() {
         return resource;
     }
 
-    public void setResource(int resource) {
+    public void setResource(String resource) {
         this.resource = resource;
     }
 
@@ -71,9 +72,10 @@ public class HomePageModel {
     private String title;
     private  List<HorizontalProductModel> horizontalProductModelList;
 
-    public HomePageModel(int type, String title, List<HorizontalProductModel> horizontalProductModelList) {
+    public HomePageModel(int type, String title,String backgroundcolor, List<HorizontalProductModel> horizontalProductModelList) {
         this.type = type;
         this.title = title;
+        this.backgroundcolor = backgroundcolor;
         this.horizontalProductModelList = horizontalProductModelList;
     }
 
