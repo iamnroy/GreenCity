@@ -3,8 +3,11 @@ package com.example.greencity;
 import static com.example.greencity.Register.setSignUpFragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +18,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toolbar;
+//import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -44,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static Boolean showCart = false;
 
 
-
     private FrameLayout framelayout;
     private ImageView actionBarLogo;
 
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        //toolbar = findViewById(R.id.toolbar);
          binding = ActivityMainBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
-          //setSupportActionBar(toolbar);
+          setSupportActionBar(toolbar);
          //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         window = getWindow();
@@ -92,7 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        //NavController navController = Navigation.findNavController(this, R.id.main_framelayout);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.getMenu().getItem(0).setChecked(true); //index might be changed to 3
@@ -100,17 +106,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         ///COMMENT THESE 3 to run Navigation_bar
         framelayout =findViewById(R.id.main_framelayout);
-        //framelayout =findViewById(R.id.app_bar_main);
+       // framelayout =findViewById(R.id.app_bar_main);
+        //setFragment(new HomeFragment(), HOME_FRAGEMENT);
 
-        if (showCart){
-          // drawer.setDrawerLockMode(1);
+        if (showCart) {
+            //drawer.setDrawerLockMode(1);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            gotoFragment("My Cart",new MyCartFragment(),-2);
-        }else {
+            gotoFragment("My Cart", new MyCartFragment(), -2);
+        } else {
 
             setFragment(new HomeFragment(), HOME_FRAGEMENT);
         }
+
 
     }
 

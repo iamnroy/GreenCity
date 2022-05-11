@@ -3,6 +3,8 @@
     package="com.example.greencity">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +22,7 @@
         <activity
             android:name=".AddressActivity"
             android:exported="false" />
-        <activity
-            android:name=".AddAddressActivity"
-            android:exported="false" />
+
         <activity
             android:name=".DeliveryActivity"
             android:exported="false" />
