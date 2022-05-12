@@ -19,6 +19,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private GridView gridView;
+    public static List<WishlistModel> wishlistModelList;
     public static List<HorizontalProductModel> horizontalProductModelList;
 
     @Override
@@ -43,18 +44,18 @@ public class ViewAllActivity extends AppCompatActivity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
-
-            List<WishlistModel> wishlistModelList = new ArrayList<>();
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 7, "120/-", "150/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 0, "3", 9, "110/-", "130/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 2, "4", 10, "130/-", "140/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 15, "120/-", "150/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 3, "2", 7, "100/-", "150/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 7, "120/-", "150/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 0, "3", 9, "110/-", "130/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 2, "4", 10, "130/-", "140/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 15, "120/-", "150/-", "Cash on delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 3, "2", 7, "100/-", "150/-", "Cash on delivery"));
+//
+//            List<WishlistModel> wishlistModelList = new ArrayList<>();
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 7, "120/-", "150/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 0, "3", 9, "110/-", "130/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 2, "4", 10, "130/-", "140/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 15, "120/-", "150/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 3, "2", 7, "100/-", "150/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 7, "120/-", "150/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 0, "3", 9, "110/-", "130/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 2, "4", 10, "130/-", "140/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 1, "2", 15, "120/-", "150/-", "Cash on delivery"));
+//            wishlistModelList.add(new WishlistModel(R.drawable.can, "Coke Can", 3, "2", 7, "100/-", "150/-", "Cash on delivery"));
 
             WishlistAdapter adapter = new WishlistAdapter(wishlistModelList, false);
             recyclerView.setAdapter(adapter);

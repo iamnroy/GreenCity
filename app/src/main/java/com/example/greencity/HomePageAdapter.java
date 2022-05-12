@@ -97,8 +97,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case HomePageModel.HORIZONTAL_PRODUCT_VIEW:
                 String layoutColor = homePageModelList.get(position).getBackgroundcolor();
                 String horizontalLayoutTitle = homePageModelList.get(position).getTitle();
+                List<WishlistModel> viewAllProductList = homePageModelList.get(position).getViewAllProductList();
                 List<HorizontalProductModel> horizontalProductModelList = homePageModelList.get(position).getHorizontalProductModelList();
-                ((HorizontalProductViewholder)holder).setHorizontalPrpductLayout(horizontalProductModelList,horizontalLayoutTitle,layoutColor);
+                ((HorizontalProductViewholder)holder).setHorizontalPrpductLayout(horizontalProductModelList,horizontalLayoutTitle,layoutColor,viewAllProductList);
                 break;
             case HomePageModel.GRID_PRODUCT_VIEW:
                 String gridLayoutColor = homePageModelList.get(position).getBackgroundcolor();
@@ -250,23 +251,26 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             horizontalRecycle.setRecycledViewPool(recycledViewPool);
 
         }
-        private void setHorizontalPrpductLayout(List<HorizontalProductModel> horizontalProductModelList,String title,String color){
+        private void setHorizontalPrpductLayout(List<HorizontalProductModel> horizontalProductModelList,String title,String color,List<WishlistModel> viewAllProductList){
             container.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
             HorizontalLayoutTitle.setText(title);
 
-            if (horizontalProductModelList.size() > 8){
-                horizontalviewAllBtn.setVisibility(View.VISIBLE);
-                horizontalviewAllBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent viewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
-                        viewAllIntent.putExtra("layout_code",0);
-                        itemView.getContext().startActivity(viewAllIntent);
-                    }
-                });
-            }else {
-                horizontalviewAllBtn.setVisibility(View.INVISIBLE);
-            }
+            //This shows error when clicking on View All btn
+//            if (horizontalProductModelList.size() > 8){
+//                horizontalviewAllBtn.setVisibility(View.VISIBLE);
+//                horizontalviewAllBtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        ViewAllActivity.wishlistModelList = viewAllProductList;
+//                        Intent viewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
+//                        viewAllIntent.putExtra("layout_code",0);
+//                        viewAllIntent.putExtra("title",title);
+//                        itemView.getContext().startActivity(viewAllIntent);
+//                    }
+//                });
+//            }else {
+//                horizontalviewAllBtn.setVisibility(View.INVISIBLE);
+//            }
 
             HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductModelList);
 

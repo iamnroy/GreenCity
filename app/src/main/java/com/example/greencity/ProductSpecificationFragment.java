@@ -27,6 +27,7 @@ public class ProductSpecificationFragment extends Fragment {
     }
 
     private RecyclerView productSpecificationRecyclerView;
+    public List<ProductSpecificationModel> productSpecificationModelList;
 
 
     @Override
@@ -42,24 +43,19 @@ public class ProductSpecificationFragment extends Fragment {
 
         productSpecificationRecyclerView.setLayoutManager(linearLayoutManager);
 
-        List<ProductSpecificationModel> productSpecificationModelList = new ArrayList<>();
-        productSpecificationModelList.add(new ProductSpecificationModel(0,"General"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(0,"Other"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
-
-
-
-
+//        productSpecificationModelList.add(new ProductSpecificationModel(0,"General"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(0,"Other"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
+//        productSpecificationModelList.add(new ProductSpecificationModel(1,"Desc","ABC"));
 
 
         ProductSpecificationAdapter productSpecificationAdapter= new ProductSpecificationAdapter(productSpecificationModelList);

@@ -2,9 +2,10 @@ package com.example.greencity;
 
 import static com.example.greencity.DBqueries.categoryModelList;
 import static com.example.greencity.DBqueries.firebaseFirestore;
-import static com.example.greencity.DBqueries.homePageModelList;
+import static com.example.greencity.DBqueries.lists;
 import static com.example.greencity.DBqueries.loadCategories;
 import static com.example.greencity.DBqueries.loadFragmentData;
+import static com.example.greencity.DBqueries.loadedCategoriesNames;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -119,16 +120,19 @@ public class HomeFragment extends Fragment {
             testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             homePageRecyclerView.setLayoutManager(testingLayoutManager);
             //List<HomePageModel> homePageModelList = new ArrayList<>();
-            adapter = new HomePageAdapter(homePageModelList);
-            homePageRecyclerView.setAdapter(adapter);
 
-            if (homePageModelList.size() == 0){
-                loadFragmentData(adapter,getContext());
+
+            if (lists.size() == 0){
+                loadedCategoriesNames.add("HOME");
+                lists.add(new ArrayList<HomePageModel>());
+                adapter = new HomePageAdapter(lists.get(0));
+                loadFragmentData(adapter,getContext(),0,"Home");
             }else{
-                categoryAdapter.notifyDataSetChanged();
+                adapter = new HomePageAdapter(lists.get(0));
+                adapter.notifyDataSetChanged();
             }
 
-
+            homePageRecyclerView.setAdapter(adapter);
         }else{
             Glide.with(this).load(R.drawable.no_internet_connection).into(noInternetConnection);
             noInternetConnection.setVisibility(View.VISIBLE);

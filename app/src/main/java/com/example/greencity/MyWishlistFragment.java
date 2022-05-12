@@ -39,16 +39,10 @@ public class MyWishlistFragment extends Fragment {
         wishlistRecyclerView.setLayoutManager(linearLayoutManager);
 
         List<WishlistModel> wishlistModelList = new ArrayList<>();
-        wishlistModelList.add(new WishlistModel(R.drawable.can,"Coke Can",1,"2",7,"120/-","150/-","Cash on delivery"));
-        wishlistModelList.add(new WishlistModel(R.drawable.can,"Coke Can",0,"3",9,"110/-","130/-","Cash on delivery"));
-        wishlistModelList.add(new WishlistModel(R.drawable.can,"Coke Can",2,"4",10,"130/-","140/-","Cash on delivery"));
-        wishlistModelList.add(new WishlistModel(R.drawable.can,"Coke Can",1,"2",15,"120/-","150/-","Cash on delivery"));
-        wishlistModelList.add(new WishlistModel(R.drawable.can,"Coke Can",3,"2",7,"100/-","150/-","Cash on delivery"));
 
         WishlistAdapter wishlistAdapter = new WishlistAdapter(wishlistModelList,true);
         wishlistRecyclerView.setAdapter(wishlistAdapter);
         wishlistAdapter.notifyDataSetChanged();
-
 
         return view;
     }
