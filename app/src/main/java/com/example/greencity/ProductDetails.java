@@ -1,6 +1,8 @@
 package com.example.greencity;
 
+import static com.example.greencity.DBqueries.currentUser;
 import static com.example.greencity.MainActivity.showCart;
+import static com.example.greencity.Register.setSignUpFragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -18,6 +21,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -74,24 +78,26 @@ public class ProductDetails extends AppCompatActivity {
     private LinearLayout ratingsNoContainer;
     private TextView totalRatingsFigure;
     private LinearLayout ratingsProgressBarContainer;
+    private TextView averageRating;
     //Rating Layout
 
     private Button buyNowBtn;
+    private LinearLayout addToCartBtn;
 
     private static boolean ALREADY_ADDED_TO_WISHLIST = false;
     private FloatingActionButton addTowishlist;
     FirebaseFirestore firebaseFirestore;
 
+    private Dialog signInDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-
         //androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -118,6 +124,8 @@ public class ProductDetails extends AppCompatActivity {
         ratingsNoContainer = findViewById(R.id.ratings_number_container);
         totalRatingsFigure = findViewById(R.id.total_ratings_figure);
         ratingsProgressBarContainer = findViewById(R.id.ratings_progressbar_container);
+        averageRating = findViewById(R.id.average_rating);
+        addToCartBtn = findViewById(R.id.add_to_cart_btn);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         List<String> productImages = new ArrayList<>();
@@ -184,6 +192,7 @@ public class ProductDetails extends AppCompatActivity {
 
                     }
                     totalRatingsFigure.setText(String.valueOf((long)documentSnapshot.get("total_ratings")));
+                    averageRating.setText(documentSnapshot.get("average_rating").toString());
                     //productDetailsViewpager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(),productDetailsTablayout.getTabCount(),productDescription,productOtherDetails,productSpecificationModelList));
 
 
@@ -195,16 +204,20 @@ public class ProductDetails extends AppCompatActivity {
             }
         });
 
-       // viewpagerIndicator.setupWithViewPager(productImagesViewPager,true);
+        viewpagerIndicator.setupWithViewPager(productImagesViewPager,true);
         addTowishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ALREADY_ADDED_TO_WISHLIST){
-                    ALREADY_ADDED_TO_WISHLIST = false;
-                    addTowishlist.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#EA5858")));
+                if (currentUser == null) {
+                    signInDialog.show();
                 }else {
-                    ALREADY_ADDED_TO_WISHLIST = true;
-                    addTowishlist.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#A1A9A3")));
+                    if (ALREADY_ADDED_TO_WISHLIST) {
+                        ALREADY_ADDED_TO_WISHLIST = false;
+                        addTowishlist.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#EA5858")));
+                    } else {
+                        ALREADY_ADDED_TO_WISHLIST = true;
+                        addTowishlist.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#A1A9A3")));
+                    }
                 }
             }
         });
@@ -235,7 +248,12 @@ public class ProductDetails extends AppCompatActivity {
             rateNowContainer.getChildAt(x).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    setRating(starPosition);
+                    if (currentUser == null) {
+                        signInDialog.show();
+                    }else {
+                        setRating(starPosition);
+                    }
+
                 }
             });
         }
@@ -244,10 +262,62 @@ public class ProductDetails extends AppCompatActivity {
         buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent deliveryIntent = new Intent(ProductDetails.this,DeliveryActivity.class);
-                startActivity(deliveryIntent);
+                if (currentUser == null) {
+                    signInDialog.show();
+                }else {
+                    Intent deliveryIntent = new Intent(ProductDetails.this, DeliveryActivity.class);
+                    startActivity(deliveryIntent);
+                }
             }
         });
+
+        addToCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currentUser == null) {
+                    signInDialog.show();
+                }else {
+                    //TODO ADD TO CART
+                }
+            }
+        });
+
+        ///SIGNIN DIALOG
+
+        signInDialog = new Dialog(ProductDetails.this);
+        signInDialog.setContentView(R.layout.sign_in_dialog);
+        signInDialog.setCancelable(true);
+        signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        Button dialogSignInBtn = signInDialog.findViewById(R.id.signin_btn);
+        Button dialogSignUnBtn = signInDialog.findViewById(R.id.signup_btn);
+        Intent registerIntent = new Intent(ProductDetails.this,Register.class);
+
+        //Un Comment This to show Dialog Box
+
+        dialogSignInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignInFragment.disableCloseBtn = true;
+                SignUpFragment.disableCloseBtn = true;
+                signInDialog.dismiss();
+                setSignUpFragment = false;
+                startActivity(registerIntent);
+            }
+        });
+
+        dialogSignUnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignInFragment.disableCloseBtn = true;
+                SignUpFragment.disableCloseBtn = true;
+                signInDialog.dismiss();
+                setSignUpFragment = true;
+                startActivity(registerIntent);
+            }
+        });
+        ///SIGNIN DIALOG
+
     }
 
     private void setRating(int starPosition) {
@@ -283,10 +353,14 @@ public class ProductDetails extends AppCompatActivity {
             return true;
 
         }else if (id == R.id.maincart){
-            Intent cartIntent = new Intent(ProductDetails.this,MainActivity.class);
-            showCart = true;
-            startActivity(cartIntent);
-            return true;
+            if (currentUser == null){
+                signInDialog.show();
+            }else {
+                Intent cartIntent = new Intent(ProductDetails.this, MainActivity.class);
+                showCart = true;
+                startActivity(cartIntent);
+                return true;
+            }
 
         }
 

@@ -23,6 +23,8 @@ import java.util.Locale;
 public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecyclerView;
+    private List<HomePageModel> homePageModelFakeList = new ArrayList<>();
+
     private ActivityMainBinding binding;
     private HomePageAdapter adapter;
 
@@ -44,6 +46,30 @@ public class CategoryActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("CategoryName");
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Home page fake liste
+        List<SliderModel> sliderModelFakeList = new ArrayList<>();
+        sliderModelFakeList.add(new SliderModel("null","#D5E5F3"));
+        sliderModelFakeList.add(new SliderModel("null","#D5E5F3"));
+        sliderModelFakeList.add(new SliderModel("null","#D5E5F3"));
+        sliderModelFakeList.add(new SliderModel("null","#D5E5F3"));
+        sliderModelFakeList.add(new SliderModel("null","#D5E5F3"));
+
+        List<HorizontalProductModel> horizontalProductModelFakeList = new ArrayList<>();
+        horizontalProductModelFakeList.add(new HorizontalProductModel("","","","",""));
+        horizontalProductModelFakeList.add(new HorizontalProductModel("","","","",""));
+        horizontalProductModelFakeList.add(new HorizontalProductModel("","","","",""));
+        horizontalProductModelFakeList.add(new HorizontalProductModel("","","","",""));
+        horizontalProductModelFakeList.add(new HorizontalProductModel("","","","",""));
+        horizontalProductModelFakeList.add(new HorizontalProductModel("","","","",""));
+        horizontalProductModelFakeList.add(new HorizontalProductModel("","","","",""));
+
+        homePageModelFakeList.add(new HomePageModel(0,sliderModelFakeList));
+        homePageModelFakeList.add(new HomePageModel(1,"","#D5E5F3"));
+        homePageModelFakeList.add(new HomePageModel(2,"","#D5E5F3",horizontalProductModelFakeList,new ArrayList<WishlistModel>()));
+        homePageModelFakeList.add(new HomePageModel(3,"","#D5E5F3",horizontalProductModelFakeList));
+
+        //Home Page fake List
 
         categoryRecyclerView = findViewById(R.id.category_recyclerview);
 
@@ -157,6 +183,10 @@ public class CategoryActivity extends AppCompatActivity {
 //        homePageModelList.add(new HomePageModel(1,R.drawable.ktmbanner,"#ffff00"));
 //        // homePageModelList.add(new HomePageModel(0,sliderModelList));
 
+
+        adapter = new HomePageAdapter(homePageModelFakeList);
+        //categoryRecyclerView.setAdapter(adapter);
+
         int listPosition = 0;
        for (int x =0;x < loadedCategoriesNames.size();x++){
            if (loadedCategoriesNames.get(x).equals(title.toUpperCase())){
@@ -166,13 +196,13 @@ public class CategoryActivity extends AppCompatActivity {
         if (listPosition == 0){
             loadedCategoriesNames.add(title.toUpperCase());
             lists.add(new ArrayList<HomePageModel>());
-            adapter = new HomePageAdapter(lists.get(loadedCategoriesNames.size() -1));
-            loadFragmentData(adapter,this,loadedCategoriesNames.size() -1,title);
+           // adapter = new HomePageAdapter(lists.get(loadedCategoriesNames.size() -1));
+            loadFragmentData(categoryRecyclerView,this,loadedCategoriesNames.size() -1,title);
         }else{
             adapter = new HomePageAdapter(lists.get(listPosition));
 
         }
-
+//        adapter = new HomePageAdapter(homePageModelFakeList);
         categoryRecyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
