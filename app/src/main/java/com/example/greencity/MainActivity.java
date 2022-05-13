@@ -1,6 +1,6 @@
 package com.example.greencity;
 
-import static com.example.greencity.DBqueries.currentUser;
+
 import static com.example.greencity.Register.setSignUpFragment;
 
 import android.app.Dialog;
@@ -39,6 +39,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.greencity.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Window window;
     private Dialog signInDialog;
+    private FirebaseUser currentUser;
+    public static DrawerLayout drawer;
 
 
     @Override
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                        .setAction("Action", null).show();
 //            }
 //        });
-        DrawerLayout drawer = binding.drawerLayout;
+        drawer = binding.drawerLayout;
         //DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         navigationView = binding.navView;
@@ -122,12 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
            // ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,"Open navigationdrawer","Close navigation drawer");
             setFragment(new HomeFragment(), HOME_FRAGEMENT);
         }
-        if (currentUser == null){
-            navigationView.getMenu().getItem(navigationView.getMenu().size() -1).setEnabled(false);
-        }else{
-            navigationView.getMenu().getItem(navigationView.getMenu().size() -1).setEnabled(true);
 
-        }
 
         signInDialog = new Dialog(MainActivity.this);
         signInDialog.setContentView(R.layout.sign_in_dialog);
@@ -163,6 +162,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null){
+            navigationView.getMenu().getItem(navigationView.getMenu().size() -1).setEnabled(false);
+        }else{
+            navigationView.getMenu().getItem(navigationView.getMenu().size() -1).setEnabled(true);
+
+        }
     }
 
     //BACK BTN
@@ -346,7 +357,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
             } else if (id == R.id.nav_signout) {
-
+                FirebaseAuth.getInstance().signOut();
+                Intent registerIntent = new Intent(MainActivity.this,Register.class);
+                startActivity(registerIntent);
+                finish();
             }
             drawer.closeDrawer(GravityCompat.START);
             return true;

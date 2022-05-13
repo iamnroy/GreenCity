@@ -49,6 +49,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent productDetailsIntent = new Intent(viewGroup.getContext(),ProductDetails.class);
+                    productDetailsIntent.putExtra("PRODUCT_ID",horizontalProductModelList.get(i).getProductID());
                     viewGroup.getContext().startActivity(productDetailsIntent);
                 }
             });
@@ -58,7 +59,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
             TextView productDesc = view.findViewById(R.id.hori_scr_pro_desc);
             TextView productPrice = view.findViewById(R.id.hori_sc_pro_price);
 
-            Glide.with(viewGroup.getContext()).load(horizontalProductModelList.get(i).getProductImage()).apply(new RequestOptions().placeholder(R.drawable.cathome)).into(productImage);
+            Glide.with(viewGroup.getContext()).load(horizontalProductModelList.get(i).getProductImage()).apply(new RequestOptions().placeholder(R.drawable.place)).into(productImage);
             productTitle.setText(horizontalProductModelList.get(i).getProductTitle());
             productDesc.setText(horizontalProductModelList.get(i).getProductDesc());
             productPrice.setText("Rs."+horizontalProductModelList.get(i).getProductPrice());

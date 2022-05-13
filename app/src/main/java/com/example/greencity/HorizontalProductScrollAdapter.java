@@ -35,13 +35,12 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
 
         String resource = horizontalProductModel.get(position).getProductImage();
         String title = horizontalProductModel.get(position).getProductTitle();
-        String desc = horizontalProductModel.get(position).getProductDesc();
+        String description = horizontalProductModel.get(position).getProductDesc();
         String price = horizontalProductModel.get(position).getProductPrice();
+        String productId = horizontalProductModel.get(position).getProductID();
 
-        holder.setProductImage(resource);
-        holder.setProductTitle(title);
-        holder.setProductDesc(desc);
-        holder.setProductPrice(price);
+        holder.setData(productId,resource,title,description,price);
+
     }
 
     @Override
@@ -69,29 +68,26 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
             productDesc = itemView.findViewById(R.id.hori_scr_pro_desc);
             productPrice = itemView.findViewById(R.id.hori_sc_pro_price);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent productDetailsIntent = new Intent(itemView.getContext(),ProductDetails.class);
-                    itemView.getContext().startActivity(productDetailsIntent);
-                }
-            });
-
-
         }
 
-        private void setProductImage(String resource){
-            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.cathome)).into(productImage);
-        }
-        private void setProductTitle(String title){
-            productTitle.setText(title);
-        }
-        private void setProductDesc(String Desc){
-            productDesc.setText(Desc);
-
-        }
-        private void setProductPrice(String price){
+        private void setData(String productId,String resource,String title,String description,String price){
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.place)).into(productImage);
             productPrice.setText("Rs. "+price+" only");
+            productDesc.setText(description);
+            productTitle.setText(title);
+
+            if (!title.equals("")) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetails.class);
+                        productDetailsIntent.putExtra("PRODUCT_ID",productId);
+                        itemView.getContext().startActivity(productDetailsIntent);
+                    }
+                });
+            }
+
         }
+
     }
 }

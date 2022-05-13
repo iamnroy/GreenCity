@@ -115,11 +115,11 @@ public class HomeFragment extends Fragment {
 
         //Categories Fake List
         categoryModeFakelList.add(new CategoryModel("null",""));
-        categoryModeFakelList.add(new CategoryModel("null",""));
-        categoryModeFakelList.add(new CategoryModel("null",""));
-        categoryModeFakelList.add(new CategoryModel("null",""));
-        categoryModeFakelList.add(new CategoryModel("null",""));
-        categoryModeFakelList.add(new CategoryModel("null",""));
+        categoryModeFakelList.add(new CategoryModel("",""));
+        categoryModeFakelList.add(new CategoryModel("",""));
+        categoryModeFakelList.add(new CategoryModel("",""));
+        categoryModeFakelList.add(new CategoryModel("",""));
+        categoryModeFakelList.add(new CategoryModel("",""));
         //Categories Fake List
 
         //Home page fake liste
@@ -147,15 +147,14 @@ public class HomeFragment extends Fragment {
         //Home Page fake List
 
         categoryAdapter = new CategoryAdapter(categoryModeFakelList);
-        categoryRecyclerView.setAdapter(categoryAdapter);
 
         adapter = new HomePageAdapter(homePageModelFakeList);
-        homePageRecyclerView.setAdapter(adapter);
 
         connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if(networkInfo != null && networkInfo.isConnected() == (true)) {
+            //MainActivity.drawer.setDrawerLockMode(0);
             noInternetConnection.setVisibility(View.GONE);
             retryBtn.setVisibility(View.GONE);
             categoryRecyclerView.setVisibility(View.VISIBLE);
@@ -170,8 +169,11 @@ public class HomeFragment extends Fragment {
             if (categoryModelList.size() == 0){
                 loadCategories(categoryRecyclerView,getContext());
             }else{
+                categoryAdapter = new CategoryAdapter(categoryModelList);
                 categoryAdapter.notifyDataSetChanged();
             }
+            categoryRecyclerView.setAdapter(categoryAdapter);
+
 
 //            homePageRecyclerView = view.findViewById(R.id.home_page_recyclerview);
 //            LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
@@ -188,9 +190,11 @@ public class HomeFragment extends Fragment {
                 adapter = new HomePageAdapter(lists.get(0));
                 adapter.notifyDataSetChanged();
             }
+            homePageRecyclerView.setAdapter(adapter);
 
             //homePageRecyclerView.setAdapter(adapter);
         }else{
+            //MainActivity.drawer.setDrawerLockMode(1);
             categoryRecyclerView.setVisibility(View.GONE);
             homePageRecyclerView.setVisibility(View.GONE);
             Glide.with(this).load(R.drawable.no_internet_connection).into(noInternetConnection);
@@ -252,7 +256,11 @@ public class HomeFragment extends Fragment {
         lists.clear();
         loadedCategoriesNames.clear();
         if(networkInfo != null && networkInfo.isConnected() == (true)) {
+           // MainActivity.drawer.setDrawerLockMode(0);
+
             noInternetConnection.setVisibility(View.GONE);
+            categoryAdapter = new CategoryAdapter(categoryModeFakelList);
+            adapter = new HomePageAdapter(homePageModelFakeList);
             retryBtn.setVisibility(View.GONE);
             categoryRecyclerView.setVisibility(View.VISIBLE);
             homePageRecyclerView.setVisibility(View.VISIBLE);
@@ -260,11 +268,14 @@ public class HomeFragment extends Fragment {
             homePageRecyclerView.setAdapter(adapter);
 
             loadCategories(categoryRecyclerView,getContext());
+
             loadedCategoriesNames.add("HOME");
             lists.add(new ArrayList<HomePageModel>());
             loadFragmentData(homePageRecyclerView,getContext(),0,"Home");
 
         }else{
+            //MainActivity.drawer.setDrawerLockMode(1);
+
             Toast.makeText(getContext(),"No Internet Connection!!!",Toast.LENGTH_SHORT).show();
             categoryRecyclerView.setVisibility(View.GONE);
             homePageRecyclerView.setVisibility(View.GONE);

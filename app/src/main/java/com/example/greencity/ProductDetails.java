@@ -1,6 +1,6 @@
 package com.example.greencity;
 
-import static com.example.greencity.DBqueries.currentUser;
+
 import static com.example.greencity.MainActivity.showCart;
 import static com.example.greencity.Register.setSignUpFragment;
 
@@ -38,6 +38,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -89,6 +91,7 @@ public class ProductDetails extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
 
     private Dialog signInDialog;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +133,7 @@ public class ProductDetails extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         List<String> productImages = new ArrayList<>();
 
-        firebaseFirestore.collection("PRODUCTS").document("5CL1MDKklEcOhsncEq34")
+        firebaseFirestore.collection("PRODUCTS").document(getIntent().getStringExtra("PRODUCT_ID"))
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -318,6 +321,12 @@ public class ProductDetails extends AppCompatActivity {
         });
         ///SIGNIN DIALOG
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     private void setRating(int starPosition) {
