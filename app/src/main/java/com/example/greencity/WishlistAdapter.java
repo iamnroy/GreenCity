@@ -1,5 +1,6 @@
 package com.example.greencity;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        String productId = wishlistModelList.get(position).getProductId();
         String resource = wishlistModelList.get(position).getProductImage();
         String title = wishlistModelList.get(position).getProductTitle();
         long freeCoupens = wishlistModelList.get(position).getFreeCoupens();
@@ -49,7 +51,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         String productPrice = wishlistModelList.get(position).getProductPrice();
         String cuttedPrice = wishlistModelList.get(position).getCuttedPrice();
         boolean paymentMethod = wishlistModelList.get(position).isCOD();
-        holder.setData(resource,title,freeCoupens,rating,totalRating,productPrice,cuttedPrice,paymentMethod,position);
+        holder.setData(productId,resource,title,freeCoupens,rating,totalRating,productPrice,cuttedPrice,paymentMethod,position);
 
         //Comment this to remove above position error
 //        if (lastPosition < position) {
@@ -94,7 +96,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
            deleteBtn = itemView.findViewById(R.id.delete_btn_wish);
 
         }
-        private void setData(String resource,String title,long freeCoupensNo,String averageRate, long totalRatingsNo,String price,String cuttedPriceValue, boolean COD,int index){
+        private void setData(String productId,String resource,String title,long freeCoupensNo,String averageRate, long totalRatingsNo,String price,String cuttedPriceValue, boolean COD,int index){
 
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.place)).into(productImage);
             productTitle.setText(title);
@@ -133,10 +135,20 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    deleteBtn.setEnabled(false);
-                   DBqueries.removeFromWishlist(index,itemView.getContext());
+                    if (!ProductDetails.running_wishlist_query) {
+                        ProductDetails.running_wishlist_query = true;
+                        DBqueries.removeFromWishlist(index, itemView.getContext());
+                    }
                 }
             });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                   // Intent productDetailsIntent = Intent(itemView.getContext(),ProductDetails.class);
+//                    productDetailsIntent.putExtra("PRODUCT_ID",productId);
+//                    itemView.getContext().startActivity(productDetailsIntent);
+//                }
+//            });
         }
     }
 }
