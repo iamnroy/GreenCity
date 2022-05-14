@@ -359,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             } else if (id == R.id.nav_signout) {
                 FirebaseAuth.getInstance().signOut();
+                DBqueries.clearData();
                 Intent registerIntent = new Intent(MainActivity.this,Register.class);
                 startActivity(registerIntent);
                 finish();
