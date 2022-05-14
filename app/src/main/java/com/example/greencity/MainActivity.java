@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        });
         drawer = binding.drawerLayout;
-        //DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 signInDialog.show();
             }else {
                 gotoFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
+               // gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
             }
            // gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
             //gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
@@ -346,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //  gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
                 // gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
                 // gotoFragment("My Rewards",new MyRewardsFragment(),REWARDS_FRAGMENT);
-                //gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
+               // gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
 
 
             } else if (id == R.id.nav_wishlist) {

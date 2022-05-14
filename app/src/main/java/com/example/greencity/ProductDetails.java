@@ -44,7 +44,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductDetails extends AppCompatActivity {
 
@@ -91,7 +93,9 @@ public class ProductDetails extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
 
     private Dialog signInDialog;
+    private Dialog loadingDialog;
     private FirebaseUser currentUser;
+    private String productID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,10 +134,20 @@ public class ProductDetails extends AppCompatActivity {
         averageRating = findViewById(R.id.average_rating);
         addToCartBtn = findViewById(R.id.add_to_cart_btn);
 
+        //Loading Dialog
+        loadingDialog = new Dialog(ProductDetails.this);
+        loadingDialog.setContentView(R.layout.loading_progress_dialog);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.slider_background));
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadingDialog.show();
+        //Loading Dialog
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         List<String> productImages = new ArrayList<>();
+        productID = getIntent().getStringExtra("PRODUCT_ID");
 
-        firebaseFirestore.collection("PRODUCTS").document(getIntent().getStringExtra("PRODUCT_ID"))
+        firebaseFirestore.collection("PRODUCTS").document(productID)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -198,9 +212,22 @@ public class ProductDetails extends AppCompatActivity {
                     averageRating.setText(documentSnapshot.get("average_rating").toString());
                     //productDetailsViewpager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(),productDetailsTablayout.getTabCount(),productDescription,productOtherDetails,productSpecificationModelList));
 
+                    if (DBqueries.wishList.size() == 0){
+                        DBqueries.loadWishlist(ProductDetails.this,loadingDialog);
+                    }else {
+                        loadingDialog.dismiss();
+                    }
 
+                    if (DBqueries.wishList.contains(productID)){
+                        ALREADY_ADDED_TO_WISHLIST = true;
+                        addTowishlist.setSupportImageTintList(getResources().getColorStateList(R.color.success));
+
+                    }else {
+                        ALREADY_ADDED_TO_WISHLIST = false;
+                    }
 
                 }else{
+                    loadingDialog.dismiss();
                     String error = task.getException().getMessage();
                     Toast.makeText(ProductDetails.this,"error",Toast.LENGTH_SHORT).show();
                 }
@@ -218,8 +245,45 @@ public class ProductDetails extends AppCompatActivity {
                         ALREADY_ADDED_TO_WISHLIST = false;
                         addTowishlist.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#EA5858")));
                     } else {
-                        ALREADY_ADDED_TO_WISHLIST = true;
-                        addTowishlist.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#A1A9A3")));
+
+                        Map<String,Object> addProduct = new HashMap<>();
+                        addProduct.put("product_ID_"+String.valueOf(DBqueries.wishList.size()),productID);
+
+
+                        firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_WISHLIST")
+                          .set(addProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+
+                                    Map<String ,Object> updateListSize = new HashMap<>();
+                                    updateListSize.put("list_size",(long)DBqueries.wishList.size() +1);
+
+                                    firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_WISHLIST")
+                                            .update(updateListSize).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+
+                                                ALREADY_ADDED_TO_WISHLIST = true;
+                                                //addTowishlist.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#A1A9A3")));
+                                                addTowishlist.setSupportImageTintList(getResources().getColorStateList(R.color.success));
+                                                DBqueries.wishList.add(productID);
+                                                Toast.makeText(ProductDetails.this,"Added to wishlist successfully",Toast.LENGTH_SHORT).show();
+
+                                            }else{
+                                                String error = task.getException().getMessage();
+                                                Toast.makeText(ProductDetails.this,"error",Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                }else{
+                                    String error = task.getException().getMessage();
+                                    Toast.makeText(ProductDetails.this,"error",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
                     }
                 }
             }
