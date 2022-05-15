@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
-    android:elevation="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/white"
+    android:elevation="3dp">
 
     <ImageView
         android:id="@+id/product_image"
@@ -21,13 +21,15 @@
 
     <TextView
         android:id="@+id/product_title_cart"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Coke Can"
-        android:textSize="16sp"
         android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/product_image"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,11 +56,11 @@
         android:id="@+id/product_price_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:text="Rs.3999/-"
-        android:textSize="22sp"
         android:textColor="#000000"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_free_cpupen" />
@@ -68,8 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:textSize="12sp"
         android:text="Rs.4999/-"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_price_cart"
         app:layout_constraintEnd_toStartOf="@+id/product_price_cart" />
 
@@ -89,8 +91,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Offers applied"
-        android:textSize="12sp"
         android:textColor="@color/primary"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/product_price_cart" />
 
@@ -110,13 +112,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Qty: 2"
-        android:textColor="#000000"
         android:background="@drawable/border_background"
         android:backgroundTint="#000000"
-        android:padding="3dp"
         android:drawableEnd="@drawable/down2"
         android:drawablePadding="8dp"
+        android:padding="3dp"
+        android:text="Qty: 2"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/coupens_applied"
         app:layout_constraintStart_toEndOf="@+id/product_image"
         app:layout_constraintTop_toBottomOf="@+id/cutted_price_cart" />
@@ -132,7 +134,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/offers_applied"
-        app:layout_constraintVertical_bias="0.067">
+        app:layout_constraintVertical_bias="0.26">
 
         <TextView
             android:id="@+id/tv_coupen_redeem"
@@ -155,21 +157,23 @@
         android:id="@+id/remove_item_btn"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_marginTop="0dp"
         android:background="#E3DBDB"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coupen_redeem_layout">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Remove Item"
-            android:gravity="center"
+            android:drawableStart="@drawable/del"
             android:drawablePadding="4dp"
-            android:textColor="#000000"
-            android:drawableStart="@drawable/del" />
+            android:gravity="center"
+            android:text="Remove Item"
+            android:textColor="#000000" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

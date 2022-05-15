@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/badge_count.xml" value="0.1295" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/border_background.xml" value="0.1295" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/cuctom_lock_icon.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/drawable/custom_button.xml" value="0.109" />
@@ -32,7 +33,8 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/activity_view_all.xml" value="0.1796875" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/addresses_item_layout.xml" value="0.2" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/app_bar_main.xml" value="0.268" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/cart_item_layout_item.xml" value="0.268" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/badge_layout.xml" value="0.44000000000000006" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/cart_item_layout_item.xml" value="0.132" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/cart_total_amount_layout.xml" value="0.2" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/category_item.xml" value="0.132" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/GreenCity2/app/src/main/res/layout/content_main.xml" value="0.1" />
@@ -91,7 +93,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.132" />
+        <option name="scale" value="0.44000000000000006" />
       </ProjectState>
     </option>
   </component>
