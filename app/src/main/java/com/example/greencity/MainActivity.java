@@ -25,6 +25,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -221,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (currentUser != null){
                     if (DBqueries.cartList.size() == 0) {
                         badgeCount.setVisibility(View.INVISIBLE);
-                        DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false,badgeCount);
+                        DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false,badgeCount,new TextView(MainActivity.this));
 
                     }else{
                         badgeCount.setVisibility(View.VISIBLE);
@@ -306,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 signInDialog.show();
             }else {
                 gotoFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
-               // gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
+               //gotoFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGMENT);
             }
            // gotoFragment("My Oders", new MyOrdersFragment(),ORDERS_FRAFEMENT);
             //gotoFragment("My Wishlist",new MyWishlistFragment(),WISHLIST_FRAGMENT);
@@ -333,8 +334,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         invalidateOptionsMenu();
         setFragment(fragment,fragmentNo);
         if (fragmentNo == CART_FRAGEMENT) {
-
             navigationView.getMenu().getItem(3).setChecked(true);
+
         }
     }
 

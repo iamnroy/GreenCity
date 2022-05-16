@@ -24,8 +24,9 @@ public class CartitemModel {
     private long productQuantity;
     private long offersApplied;
     private long coupensApplied;
+    private boolean inStock;
 
-    public CartitemModel(int type,String productID, String productImage, String productTitle, long freeCoupens, String productPrice, String cuttedPrice, long productQuantity, long offersApplied, long coupensApplied) {
+    public CartitemModel(int type,String productID, String productImage, String productTitle, long freeCoupens, String productPrice, String cuttedPrice, long productQuantity, long offersApplied, long coupensApplied,boolean inStock) {
         this.type = type;
         this.productID = productID;
         this.productImage = productImage;
@@ -36,6 +37,15 @@ public class CartitemModel {
         this.productQuantity = productQuantity;
         this.offersApplied = offersApplied;
         this.coupensApplied = coupensApplied;
+        this.inStock = inStock;
+    }
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
     }
 
     public String getProductID() {

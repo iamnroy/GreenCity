@@ -106,11 +106,12 @@
                     android:inputType="number"
                     android:textColor="#2A752D" />
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/districSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Distric*"
-                    android:inputType="textPersonName"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border_background"
+                    android:backgroundTint="#94E498"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="16dp"
                     android:textColor="#2A752D"
@@ -127,7 +128,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:hint="Landmark (optional)"
-                android:inputType="number"
+                android:inputType="textPersonName"
                 android:textColor="#2A752D" />
 
             <View
@@ -158,7 +159,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
-                android:hint="Phone No*"
+                android:hint="Mobile No*"
                 android:inputType="number"
                 android:textColor="#2A752D" />
 

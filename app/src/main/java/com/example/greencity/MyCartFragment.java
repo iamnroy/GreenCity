@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class MyCartFragment extends Fragment {
     private Button btnContinue;
     private Dialog loadingDialog;
     public static CartAdapter cartAdapter;
+    private TextView totalAmount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +52,7 @@ public class MyCartFragment extends Fragment {
 
         cartItemsRecyclerView = view.findViewById(R.id.cart_items_recycler_view);
         btnContinue = view.findViewById(R.id.cart_continue_btn);
+        totalAmount = view.findViewById(R.id.total_cart_amount);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -57,13 +60,17 @@ public class MyCartFragment extends Fragment {
 
         if (DBqueries.cartitemModelList.size() == 0){
             DBqueries.cartList.clear();
-            DBqueries.loadCartList(getContext(),loadingDialog,true,new TextView(getContext()));
+            DBqueries.loadCartList(getContext(),loadingDialog,true,new TextView(getContext()),totalAmount);
         }else{
+            if (DBqueries.cartitemModelList.get(DBqueries.cartitemModelList.size() - 1).getType() == CartitemModel.TOTAL_AMOUNT) {
+                LinearLayout parent = (LinearLayout) totalAmount.getParent().getParent();
+                parent.setVisibility(View.VISIBLE);
+            }
             loadingDialog.dismiss();
         }
 
 
-        cartAdapter = new CartAdapter(DBqueries.cartitemModelList);
+        cartAdapter = new CartAdapter(DBqueries.cartitemModelList,totalAmount,true);
         cartItemsRecyclerView.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
 
@@ -71,9 +78,24 @@ public class MyCartFragment extends Fragment {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent deliveryIntent = new Intent(getContext(),DeliveryActivity.class);
-               // Intent deliveryIntent = new Intent(getContext(),AddressActivity.class);
-                getContext().startActivity(deliveryIntent);
+                DeliveryActivity.cartitemModelList = new ArrayList<>();
+
+                for (int x = 0;x < DBqueries.cartitemModelList.size();x++){
+                    CartitemModel cartitemModel = DBqueries.cartitemModelList.get(x);
+                    if (cartitemModel.isInStock()){
+                        DeliveryActivity.cartitemModelList.add(cartitemModel);
+                    }
+                }
+               DeliveryActivity.cartitemModelList.add(new CartitemModel(CartitemModel.TOTAL_AMOUNT));
+
+               loadingDialog.show();
+               if (DBqueries.addressesModelList.size() == 0) {
+                   DBqueries.loadAddresses(getContext(), loadingDialog);
+               }else {
+                   loadingDialog.dismiss();
+                   Intent deliveryIntent = new Intent(getContext(), DeliveryActivity.class);
+                   startActivity(deliveryIntent);
+               }
             }
         });
         return view;
