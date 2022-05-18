@@ -3,6 +3,7 @@ package com.example.greencity;
 
 import static com.example.greencity.Register.setSignUpFragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int REWARDS_FRAGMENT= 4;
     private static final int ACCOUNT_FRAGMENT= 5;
     public static Boolean showCart = false;
+    public static Activity mainActivity;
 
 
     private FrameLayout framelayout;
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //setFragment(new HomeFragment(), HOME_FRAGEMENT);
 
         if (showCart) {
+            mainActivity = this;
             //drawer.setDrawerLockMode(1);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             gotoFragment("My Cart", new MyCartFragment(), -2);
@@ -192,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }else{
 
                 if(showCart){
+                    mainActivity = null;
                     showCart = false;
                     finish();
                 }else {
@@ -318,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }else if (id == android.R.id.home){
             if (showCart){
+                mainActivity = null;
                 showCart = false;
                 finish();
                 return true;

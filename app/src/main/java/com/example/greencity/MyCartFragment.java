@@ -76,9 +76,11 @@ public class MyCartFragment extends Fragment {
 
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 DeliveryActivity.cartitemModelList = new ArrayList<>();
+                DeliveryActivity.fromCart = true;
 
                 for (int x = 0;x < DBqueries.cartitemModelList.size();x++){
                     CartitemModel cartitemModel = DBqueries.cartitemModelList.get(x);
@@ -92,6 +94,7 @@ public class MyCartFragment extends Fragment {
                if (DBqueries.addressesModelList.size() == 0) {
                    DBqueries.loadAddresses(getContext(), loadingDialog);
                }else {
+
                    loadingDialog.dismiss();
                    Intent deliveryIntent = new Intent(getContext(), DeliveryActivity.class);
                    startActivity(deliveryIntent);
@@ -99,5 +102,11 @@ public class MyCartFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        cartAdapter.notifyDataSetChanged();
     }
 }

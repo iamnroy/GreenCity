@@ -1,5 +1,7 @@
 package com.example.greencity;
 
+import static com.example.greencity.Register.onResetPasswordFragment;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -141,6 +143,7 @@ public class SignInFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                onResetPasswordFragment = true;
                 setFragment(new Reset_pw_Fragment());
             }
         });

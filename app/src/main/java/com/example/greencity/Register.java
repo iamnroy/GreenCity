@@ -24,7 +24,7 @@ public class Register extends AppCompatActivity {
             setSignUpFragment = false;
             setFragment(new SignUpFragment());
         }else {
-            setFragment(new SignInFragment());
+            setDefaultFragment(new SignInFragment());
         }
     }
 
@@ -43,8 +43,15 @@ public class Register extends AppCompatActivity {
             return super.onKeyDown(keyCode, event);
     }
 
-    private void setFragment(Fragment fragment){
+    private void setDefaultFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(frameLayout.getId(),fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.left_side,R.anim.slide_out);
         fragmentTransaction.replace(frameLayout.getId(),fragment);
         fragmentTransaction.commit();
     }

@@ -42,7 +42,7 @@ public class MyRewardsFragment extends Fragment {
         rewardModelList.add(new RewardModel("Cashback","Till 27th June 2022","Get 10% Cashback"));
         rewardModelList.add(new RewardModel("Cashback","Till 20th June 2022","Get 10% Cashback"));
 
-        MyRewardsAdapter myRewardsAdapter = new MyRewardsAdapter(rewardModelList);
+        MyRewardsAdapter myRewardsAdapter = new MyRewardsAdapter(rewardModelList,false);
         rewardsRecyclerView.setAdapter(myRewardsAdapter);
         myRewardsAdapter.notifyDataSetChanged();
 

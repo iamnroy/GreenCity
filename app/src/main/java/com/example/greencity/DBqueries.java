@@ -122,7 +122,8 @@ public class DBqueries {
                                                 ,(long)documentSnapshot.get("total_ratings_"+x)
                                                 ,documentSnapshot.get("product_price_"+x).toString()
                                                 ,documentSnapshot.get("cutted_price_"+x).toString()
-                                                ,(boolean)documentSnapshot.get("COD_"+x)));
+                                                ,(boolean)documentSnapshot.get("COD_"+x)
+                                        ,(boolean) documentSnapshot.get("in_stock_"+x)));
 
                                     }
                                     lists.get(index).add(new HomePageModel(2,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_background").toString(),horizontalProductModelList,viewAllProductList));
@@ -199,7 +200,8 @@ public class DBqueries {
                                                , (long) task.getResult().get("total_ratings")
                                                , task.getResult().get("product_price").toString()
                                                , task.getResult().get("cutted_price").toString()
-                                               , (boolean) task.getResult().get("COD")));
+                                               , (boolean) task.getResult().get("COD")
+                                               ,(boolean)task.getResult().get("in_stock")));
 
                                        MyWishlistFragment.wishlistAdapter.notifyDataSetChanged();
 
@@ -332,7 +334,8 @@ public class DBqueries {
                                                 , (long) 1
                                                 , (long) 0
                                                 , (long) 0
-                                                ,(boolean)task.getResult().get("in_stock")));
+                                                ,(boolean)task.getResult().get("in_stock")
+                                                ,(long)task.getResult().get("max-quantity")));
 
                                         if (cartList.size() == 1){
                                             cartitemModelList.add(new CartitemModel(CartitemModel.TOTAL_AMOUNT));
@@ -430,7 +433,8 @@ public class DBqueries {
                             addressesModelList.add(new AddressesModel(task.getResult().get("fullname_"+x).toString(),
                                     task.getResult().get("address_"+x).toString(),
                                     task.getResult().get("pincode_"+x).toString(),
-                                    (boolean)task.getResult().get("selected_"+x)));
+                                    (boolean)task.getResult().get("selected_"+x)
+                                    ,task.getResult().get("mobile_no_"+x).toString()));
 
                             if ((boolean)task.getResult().get("selected_"+x)){
                                 selectedAddress =  Integer.parseInt(String.valueOf(x - 1));
@@ -456,6 +460,9 @@ public class DBqueries {
         wishlistModelList.clear();
         cartList.clear();
         cartitemModelList.clear();
+        myRateedIds.clear();
+        myRating.clear();
+        addressesModelList.clear();
     }
 
 }

@@ -155,7 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        android:background="#37A2D3"
+        android:background="#20759C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -173,8 +173,10 @@
             android:id="@+id/coupen_redeem_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textStyle="bold"
             android:layout_marginLeft="130dp"
-            android:background="@drawable/border_background"
+            android:background="#000000"
             android:text="Redeem" />
     </LinearLayout>
 

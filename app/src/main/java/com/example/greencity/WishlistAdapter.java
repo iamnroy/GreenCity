@@ -51,7 +51,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         String productPrice = wishlistModelList.get(position).getProductPrice();
         String cuttedPrice = wishlistModelList.get(position).getCuttedPrice();
         boolean paymentMethod = wishlistModelList.get(position).isCOD();
-        holder.setData(productId,resource,title,freeCoupens,rating,totalRating,productPrice,cuttedPrice,paymentMethod,position);
+        boolean inStock = wishlistModelList.get(position).isInStock();
+        holder.setData(productId,resource,title,freeCoupens,rating,totalRating,productPrice,cuttedPrice,paymentMethod,position,inStock);
 
         //Comment this to remove above position error
 //        if (lastPosition < position) {
@@ -96,11 +97,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
            deleteBtn = itemView.findViewById(R.id.delete_btn_wish);
 
         }
-        private void setData(String productId,String resource,String title,long freeCoupensNo,String averageRate, long totalRatingsNo,String price,String cuttedPriceValue, boolean COD,int index){
+        private void setData(String productId,String resource,String title,long freeCoupensNo,String averageRate, long totalRatingsNo,String price,String cuttedPriceValue, boolean COD,int index,boolean inStock){
 
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.place)).into(productImage);
             productTitle.setText(title);
-            if (freeCoupensNo != 0){
+            if (freeCoupensNo != 0 && inStock){
                 coupenIcon.setVisibility(View.VISIBLE);
                 if (freeCoupensNo == 1) {
                     freeCoupens.setText("Free " + freeCoupensNo + " coupen");
@@ -113,18 +114,32 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 freeCoupens.setVisibility(View.INVISIBLE);
 
             }
-            rating.setText(averageRate);
-            totalRating.setText(totalRatingsNo+"(ratings)");
-            productPrice.setText(price);
-            cuttedPrice.setText(cuttedPriceValue);
-            if (COD){
-                paymentMethod.setVisibility(View.VISIBLE);
+            if (inStock) {
 
-            }else{
-                paymentMethod.setVisibility(View.INVISIBLE);
+                rating.setVisibility(View.VISIBLE);
+                totalRating.setVisibility(View.VISIBLE);
+                productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.black));
+                cuttedPrice.setVisibility(View.VISIBLE);
 
+                rating.setText(averageRate);
+                totalRating.setText(totalRatingsNo+"(ratings)");
+                productPrice.setText(price);
+                cuttedPrice.setText(cuttedPriceValue);
+
+                if (COD){
+                    paymentMethod.setVisibility(View.VISIBLE);
+
+                }else{
+                    paymentMethod.setVisibility(View.INVISIBLE);
+
+                }
+            }else {
+                rating.setVisibility(View.INVISIBLE);
+                totalRating.setVisibility(View.INVISIBLE);
+                productPrice.setText("Out of stock");
+                productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.red));
+                cuttedPrice.setVisibility(View.INVISIBLE);
             }
-
 
             if (wishlist){
                 deleteBtn.setVisibility(View.VISIBLE);

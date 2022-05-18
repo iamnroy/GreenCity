@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GreenCity">
         <activity
+            android:name=".OTPverificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewAllActivity"
             android:exported="false" />
         <activity
@@ -22,7 +25,6 @@
         <activity
             android:name=".AddressActivity"
             android:exported="false" />
-
         <activity
             android:name=".DeliveryActivity"
             android:exported="false" />
@@ -43,9 +45,11 @@
             android:theme="@style/Theme.GreenCity.NoActionBar" />
         <activity
             android:name=".Register"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".splash"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

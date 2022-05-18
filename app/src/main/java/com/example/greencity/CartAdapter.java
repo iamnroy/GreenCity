@@ -2,6 +2,7 @@ package com.example.greencity;
 
 import android.app.Dialog;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,8 +75,11 @@ public class CartAdapter extends RecyclerView.Adapter {
                 String cuttedPrice = cartitemModelList.get(position).getCuttedPrice();
                 long offersApplied = cartitemModelList.get(position).getOffersApplied();
                 boolean inStock = cartitemModelList.get(position).isInStock();
+                Long productQuantity = cartitemModelList.get(position).getProductQuantity();
+                Long maxQuantity = cartitemModelList.get(position).getMaxQuantity();
 
-                ((cartItemViewholder)holder).setItemDetails(productID,resource,title,freeCoupens,productPrice,cuttedPrice,offersApplied,position,inStock);
+
+                ((cartItemViewholder)holder).setItemDetails(productID,resource,title,freeCoupens,productPrice,cuttedPrice,offersApplied,position,inStock,String.valueOf(productQuantity),maxQuantity);
 
                 break;
                 case CartitemModel.TOTAL_AMOUNT:
@@ -145,7 +150,7 @@ public class CartAdapter extends RecyclerView.Adapter {
             deleteBtn = itemView.findViewById(R.id.remove_item_btn);
 
         }
-        private void setItemDetails(String productID,String resource, String title, long freeCoupensNo, String productPriceText, String cuttedPriceText, long offersAppliedNo,int position,boolean inStock){
+        private void setItemDetails(String productID,String resource, String title, long freeCoupensNo, String productPriceText, String cuttedPriceText, long offersAppliedNo,int position,boolean inStock,String quantity,Long maxQuantity){
 
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.place)).into(productImage);
             productTitle.setText(title);
@@ -167,6 +172,7 @@ public class CartAdapter extends RecyclerView.Adapter {
                 cuttedPrice.setText("Rs."+cuttedPriceText+"/-");
                 coupenRedemptionLayout.setVisibility(View.VISIBLE);
 
+                productQuantity.setText("Qty: "+ quantity);
                 productQuantity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -177,6 +183,7 @@ public class CartAdapter extends RecyclerView.Adapter {
                         final EditText quantityNo = quantityDialog.findViewById(R.id.quantity_number);
                         Button cancelBtn = quantityNo.findViewById(R.id.cancel_btn);
                         Button okBtn = quantityNo.findViewById(R.id.ok_btn);
+                        quantityNo.setHint("Max "+ String.valueOf(maxQuantity));
 
 //                        cancelBtn.setOnClickListener(new View.OnClickListener() {
 //                            @Override
@@ -184,15 +191,36 @@ public class CartAdapter extends RecyclerView.Adapter {
 //                                quantityDialog.dismiss();
 //                            }
 //                        });
-//
+
 //                        okBtn.setOnClickListener(new View.OnClickListener() {
 //                            @Override
 //                            public void onClick(View view) {
-//                                productQuantity.setText("Qty: "+ quantityNo.getText());
-//                                quantityDialog.dismiss();
+//                                if (!TextUtils.isEmpty(quantityNo.getText())) {
+//                                    if (Long.valueOf(quantityNo.getText().toString()) <= maxQuantity && Long.valueOf(quantityNo.getText().toString()) != 0) {
+//
+//                                        if (itemView.getContext() instanceof MainActivity){
+//                                            DBqueries.cartitemModelList.get(position).setProductQuantity(Long.valueOf(quantityNo.getText().toString()));
+//
+//                                        }else {
+//
+//                                            if (DeliveryActivity.fromCart) {
+//                                                DBqueries.cartitemModelList.get(position).setProductQuantity(Long.valueOf(quantityNo.getText().toString()));
+//                                            } else {
+//                                                DeliveryActivity.cartitemModelList.get(position).setProductQuantity(Long.valueOf(quantityNo.getText().toString()));
+//                                            }
+//                                        }
+//
+//                                        productQuantity.setText("Qty: " + quantityNo.getText());
+//
+//                                    }else {
+//                                        Toast.makeText(itemView.getContext(),"Max quantity : "+maxQuantity.toString(),Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                                    quantityDialog.dismiss();
+//
 //                            }
 //                        });
-                        //quantityDialog.show();
+                        quantityDialog.show();
                     }
                 });
 

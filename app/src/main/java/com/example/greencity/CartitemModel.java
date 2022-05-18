@@ -1,5 +1,8 @@
 package com.example.greencity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartitemModel {
     public static final int CART_ITEM = 0;
     public static final int TOTAL_AMOUNT = 1;
@@ -22,11 +25,13 @@ public class CartitemModel {
     private String productPrice;
     private String cuttedPrice;
     private long productQuantity;
+    private long maxQuantity;
     private long offersApplied;
     private long coupensApplied;
     private boolean inStock;
+    private List<String> qtyIDs;
 
-    public CartitemModel(int type,String productID, String productImage, String productTitle, long freeCoupens, String productPrice, String cuttedPrice, long productQuantity, long offersApplied, long coupensApplied,boolean inStock) {
+    public CartitemModel(int type,String productID, String productImage, String productTitle, long freeCoupens, String productPrice, String cuttedPrice, long productQuantity, long offersApplied, long coupensApplied,boolean inStock, Long maxQuantity) {
         this.type = type;
         this.productID = productID;
         this.productImage = productImage;
@@ -37,7 +42,25 @@ public class CartitemModel {
         this.productQuantity = productQuantity;
         this.offersApplied = offersApplied;
         this.coupensApplied = coupensApplied;
+        this.maxQuantity = maxQuantity;
         this.inStock = inStock;
+        qtyIDs = new ArrayList<>();
+    }
+
+    public List<String> getQtyIDs() {
+        return qtyIDs;
+    }
+
+    public void setQtyIDs(List<String> qtyIDs) {
+        this.qtyIDs = qtyIDs;
+    }
+
+    public long getMaxQuantity() {
+        return maxQuantity;
+    }
+
+    public void setMaxQuantity(long maxQuantity) {
+        this.maxQuantity = maxQuantity;
     }
 
     public boolean isInStock() {
@@ -100,7 +123,7 @@ public class CartitemModel {
         return productQuantity;
     }
 
-    public void setProductQuantity(int productQuantity) {
+    public void setProductQuantity(long productQuantity) {
         this.productQuantity = productQuantity;
     }
 

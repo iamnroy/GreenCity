@@ -13,15 +13,26 @@ import java.util.List;
 public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.ViewHolder> {
 
     private List<RewardModel> rewardModelList;
+    private boolean useMiniLayout = false;
 
-    public MyRewardsAdapter(List<RewardModel> rewardModelList) {
+    public MyRewardsAdapter(List<RewardModel> rewardModelList,boolean useMiniLayout) {
         this.rewardModelList = rewardModelList;
+        this.useMiniLayout = useMiniLayout;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rewards_item_layout,parent,false);
+        View view;
+
+        if (useMiniLayout){
+             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mini_rewards_item_layout,parent,false);
+
+        }else {
+             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rewards_item_layout,parent,false);
+
+        }
+
         return new ViewHolder(view);
     }
 
@@ -55,6 +66,18 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
             coupenTitle.setText(title);
             coupenExpiryDate.setText(date);
             coupenBody.setText(body);
+
+            if (useMiniLayout){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ProductDetails.coupenTitle.setText(title);
+                        ProductDetails.coupenExpiryDate.setText(date);
+                        ProductDetails.coupenBody.setText(body);
+                        ProductDetails.showDialogRecyclerView();
+                    }
+                });
+            }
         }
     }
 }
