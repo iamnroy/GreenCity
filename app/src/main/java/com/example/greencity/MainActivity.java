@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ///COMMENT THESE 3 to run Navigation_bar
         framelayout =findViewById(R.id.main_framelayout);
        // framelayout =findViewById(R.id.app_bar_main);
-        //setFragment(new HomeFragment(), HOME_FRAGEMENT);
+       // setFragment(new HomeFragment(), HOME_FRAGEMENT);
 
         if (showCart) {
             mainActivity = this;
